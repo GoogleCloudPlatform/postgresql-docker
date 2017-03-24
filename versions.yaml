@@ -1,3 +1,22 @@
+# Copyright (c) 2017, Google Inc.
+#
+# Permission to use, copy,
+# modify, and distribute this software and its documentation for any purpose,
+# without fee, and without a written agreement is hereby granted, provided that
+# the above copyright notice and this paragraph and the following two paragraphs
+# appear in all copies.
+#
+# IN NO EVENT SHALL GOOGLE BE LIABLE TO ANY PARTY
+# FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING
+# LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION,
+# EVEN IF GOOGLE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# GOOGLE SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT
+# NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+# PARTICULAR PURPOSE. THE SOFTWARE PROVIDED HEREUNDER IS ON AN "AS IS" BASIS,
+# AND GOOGLE HAS NO OBLIGATIONS TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
+# ENHANCEMENTS, OR MODIFICATIONS.
+
 _variables:
   from: &from gcr.io/google-appengine/debian8:latest
   gosu: &gosu
@@ -8,8 +27,9 @@ versions:
   - dir: 9.6
     repo: postgresql9
     tags:
-      - 9.6
       - latest
+      - 9.6
+      - 9.6.2
     from: *from
     packages:
       gosu: *gosu
@@ -21,6 +41,7 @@ versions:
     repo: postgresql9
     tags:
       - 9.5
+      - 9.5.6
     from: *from
     packages:
       gosu: *gosu
@@ -32,6 +53,7 @@ versions:
     repo: postgresql9
     tags:
       - 9.4
+      - 9.4.11
     from: *from
     packages:
       gosu: *gosu
@@ -43,6 +65,7 @@ versions:
     repo: postgresql9
     tags:
       - 9.3
+      - 9.3.16
     from: *from
     packages:
       gosu: *gosu
@@ -54,6 +77,7 @@ versions:
     repo: postgresql9
     tags:
       - 9.2
+      - 9.2.20
     from: *from
     packages:
       gosu: *gosu
