@@ -56,6 +56,7 @@ if [ "$1" = 'postgres' ] && [ "$(id -u)" = '0' ]; then
 	chmod g+s /var/run/postgresql
 
 	# Create the transaction log directory before initdb is run (below) so the directory is owned by the correct user
+	file_env 'POSTGRES_INITDB_XLOGDIR'
 	if [ "$POSTGRES_INITDB_XLOGDIR" ]; then
 		mkdir -p "$POSTGRES_INITDB_XLOGDIR"
 		chown -R postgres "$POSTGRES_INITDB_XLOGDIR"
@@ -106,7 +107,7 @@ if [ "$1" = 'postgres' ]; then
 
 		{ echo; echo "host all all all $authMethod"; } | tee -a "$PGDATA/pg_hba.conf" > /dev/null
 
-		# internal start of server in order to allow set-up using psql-client		
+		# internal start of server in order to allow set-up using psql-client
 		# does not listen on external TCP/IP and waits until start finishes
 		PGUSER="${PGUSER:-postgres}" \
 		pg_ctl -D "$PGDATA" \
