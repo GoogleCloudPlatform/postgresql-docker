@@ -24,7 +24,7 @@ _variables:
     gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
 
 versions:
-  - dir: 9.6
+  - dir: 9/9.6
     repo: postgresql9
     tags:
       - latest
@@ -37,7 +37,7 @@ versions:
         version: 9.6.2-1.pgdg80+1
         major: 9.6
         gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-  - dir: 9.5
+  - dir: 9/9.5
     repo: postgresql9
     tags:
       - 9.5
@@ -49,7 +49,7 @@ versions:
         version: 9.5.6-1.pgdg80+1
         major: 9.5
         gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-  - dir: 9.4
+  - dir: 9/9.4
     repo: postgresql9
     tags:
       - 9.4
@@ -61,7 +61,7 @@ versions:
         version: 9.4.11-1.pgdg80+1
         major: 9.4
         gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-  - dir: 9.3
+  - dir: 9/9.3
     repo: postgresql9
     tags:
       - 9.3
@@ -73,7 +73,7 @@ versions:
         version: 9.3.16-1.pgdg80+1
         major: 9.3
         gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-  - dir: 9.2
+  - dir: 9/9.2
     repo: postgresql9
     tags:
       - 9.2
