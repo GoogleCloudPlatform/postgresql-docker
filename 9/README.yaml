@@ -62,7 +62,7 @@ taskGroups:
     - description: >-
         For information about how to retain your database across restarts, see
         [](#use-a-persistent-data-volume).
-  - title: Use a persistent data volume ### TODO - not tested
+  - title: Use a persistent data volume
     runtimes: [DOCKER, KUBERNETES]
     anchorId: use-a-persistent-data-volume
     instructions:
