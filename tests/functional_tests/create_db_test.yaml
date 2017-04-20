@@ -1,0 +1,15 @@
+setup:
+- command: [docker, run, --privileged=true, --name, some-postgres, -d, '$IMAGE']
+- command: [sleep, 15s]
+
+teardown:
+- command: [docker, stop, some-postgres]
+- command: [docker, rm, some-postgres]
+
+target: some-postgres
+tests:
+- name: Create a database
+  command: [psql, --username, postgres, -c, 'CREATE DATABASE testdb']
+  expect:
+    stdout:
+      equals: CREATE DATABASE
