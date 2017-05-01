@@ -6,6 +6,7 @@ For more information, see the
 [Official Image Launcher Page](https://console.cloud.google.com/launcher/details/google/postgresql9).
 
 Pull command:
+
 ```shell
 gcloud docker -- pull launcher.gcr.io/google/postgresql9
 ```
@@ -45,6 +46,7 @@ This section describes how to spin up a PostgreSQL service using this image.
 ### <a name="start-a-postgresql-instance-kubernetes"></a>Start a PostgreSQL instance
 
 Copy the following content to `pod.yaml` file, and run `kubectl create -f pod.yaml`.
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -57,11 +59,12 @@ spec:
     - image: launcher.gcr.io/google/postgresql9
       name: postgres
       env:
-        - name: POSTGRES_PASSWORD
-          value: example-password
+        - name: "POSTGRES_PASSWORD"
+          value: "example-password"
 ```
 
 Run the following to expose the port:
+
 ```shell
 kubectl expose pod some-postgres --name some-postgres-5432 \
   --type LoadBalancer --port 5432 --protocol TCP
@@ -74,6 +77,7 @@ For information about how to retain your database across restarts, see [Use a pe
 We can store PostgreSQL data on a persistent volume. This way the database remains intact across restarts.
 
 Copy the following content to `pod.yaml` file, and run `kubectl create -f pod.yaml`.
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -86,8 +90,8 @@ spec:
     - image: launcher.gcr.io/google/postgresql9
       name: postgres
       env:
-        - name: POSTGRES_PASSWORD
-          value: example-password
+        - name: "POSTGRES_PASSWORD"
+          value: "example-password"
       volumeMounts:
         - name: data
           mountPath: /var/lib/postgresql/data
@@ -112,6 +116,7 @@ spec:
 ```
 
 Run the following to expose the port:
+
 ```shell
 kubectl expose pod some-postgres --name some-postgres-5432 \
   --type LoadBalancer --port 5432 --protocol TCP
@@ -165,6 +170,7 @@ This section describes how to spin up a PostgreSQL service using this image.
 ### <a name="start-a-postgresql-instance-docker"></a>Start a PostgreSQL instance
 
 Use the following content for the `docker-compose.yml` file, then run `docker-compose up`.
+
 ```yaml
 version: '2'
 services:
@@ -172,7 +178,7 @@ services:
     container_name: some-postgres
     image: launcher.gcr.io/google/postgresql9
     environment:
-      POSTGRES_PASSWORD: example-password
+      "POSTGRES_PASSWORD": "example-password"
 ```
 
 Or you can use `docker run` directly:
@@ -180,7 +186,7 @@ Or you can use `docker run` directly:
 ```shell
 docker run \
   --name some-postgres \
-  -e POSTGRES_PASSWORD=example-password \
+  -e "POSTGRES_PASSWORD=example-password" \
   -d \
   launcher.gcr.io/google/postgresql9
 ```
@@ -194,6 +200,7 @@ For information about how to retain your database across restarts, see [Use a pe
 We can store PostgreSQL data on a persistent volume. This way the database remains intact across restarts. Assume that `/my/persistent/dir/postgres` is the persistent directory on the host.
 
 Use the following content for the `docker-compose.yml` file, then run `docker-compose up`.
+
 ```yaml
 version: '2'
 services:
@@ -201,7 +208,7 @@ services:
     container_name: some-postgres
     image: launcher.gcr.io/google/postgresql9
     environment:
-      POSTGRES_PASSWORD: example-password
+      "POSTGRES_PASSWORD": "example-password"
     volumes:
       - /my/persistent/dir/postgres:/var/lib/postgresql/data
 ```
@@ -211,7 +218,7 @@ Or you can use `docker run` directly:
 ```shell
 docker run \
   --name some-postgres \
-  -e POSTGRES_PASSWORD=example-password \
+  -e "POSTGRES_PASSWORD=example-password" \
   -v /my/persistent/dir/postgres:/var/lib/postgresql/data \
   -d \
   launcher.gcr.io/google/postgresql9
