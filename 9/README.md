@@ -10,7 +10,7 @@ Pull command:
 gcloud docker -- pull launcher.gcr.io/google/postgresql9
 ```
 
-Dockerfile for this image can be found [here](https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/9/9.6).
+Dockerfile for this image can be found [here](https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/9).
 
 # <a name="table-of-contents"></a>Table of Contents
 * [Using Kubernetes](#using-kubernetes)

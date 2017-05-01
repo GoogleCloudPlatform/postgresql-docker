@@ -45,7 +45,7 @@ overview:
 
     For more information, see the
     [Official Image Launcher Page](https://console.cloud.google.com/launcher/details/google/postgresql9).
-  dockerfileUrl: https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/9/9.6
+  dockerfileUrl: https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/9
   pullCommand: *PullCommand
 
 taskGroups:
