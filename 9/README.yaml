@@ -104,12 +104,14 @@ taskGroups:
         Assume that we have a PostgreSQL server running at `some-host` and
         we want to log on to `some-db` database as `postgres` user. Run the
         following command.
+      applicableRuntimes: [DOCKER]
     - description: >-
         Assume that we have a PostgreSQL server running at `some-host` and
         we want to log on to `some-db` database as `postgres` user. Run the
         following command. You will need to enter the password even though
         there might be no visible passowrd prompt; this is due to limitations
         of `kubectl exec`.
+      applicableRuntimes: [KUBERNETES]
       run:
         <<: *BaseClientRun
         arguments:

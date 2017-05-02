@@ -138,8 +138,6 @@ Note: No password is required when connecting from inside the same container.
 
 ### <a name="connect-to-a-remote-postgresql-server-kubernetes"></a>Connect to a remote PostgreSQL server
 
-Assume that we have a PostgreSQL server running at `some-host` and we want to log on to `some-db` database as `postgres` user. Run the following command.
-
 Assume that we have a PostgreSQL server running at `some-host` and we want to log on to `some-db` database as `postgres` user. Run the following command. You will need to enter the password even though there might be no visible passowrd prompt; this is due to limitations of `kubectl exec`.
 
 ```shell
@@ -241,17 +239,6 @@ Note: No password is required when connecting from inside the same container.
 ### <a name="connect-to-a-remote-postgresql-server-docker"></a>Connect to a remote PostgreSQL server
 
 Assume that we have a PostgreSQL server running at `some-host` and we want to log on to `some-db` database as `postgres` user. Run the following command.
-
-Assume that we have a PostgreSQL server running at `some-host` and we want to log on to `some-db` database as `postgres` user. Run the following command. You will need to enter the password even though there might be no visible passowrd prompt; this is due to limitations of `kubectl exec`.
-
-```shell
-docker run \
-  --name some-postgres-client \
-  --rm \
-  -it \
-  launcher.gcr.io/google/postgresql9 \
-  sh -c 'exec psql --host some-host --dbname some-db --username postgres --password'
-```
 
 ## <a name="maintenance-docker"></a>Maintenance
 
