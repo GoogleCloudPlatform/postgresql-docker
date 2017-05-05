@@ -13,7 +13,7 @@ RUN set -x \
 	&& tar -xvf gosu.tar.gz -C /usr/local/src \
 	&& rm gosu.tar.gz \
 	&& export GNUPGHOME="$(mktemp -d)" \
-	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+	&& gpg --keyserver pgp.mit.edu --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
 	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
 	&& rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
 	&& chmod +x /usr/local/bin/gosu \
@@ -30,7 +30,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 RUN set -ex; \
 	key='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8'; \
 	export GNUPGHOME="$(mktemp -d)"; \
-	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+	gpg --keyserver pgp.mit.edu --recv-keys "$key"; \
 	gpg --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
 	rm -r "$GNUPGHOME"; \
 	apt-key list
