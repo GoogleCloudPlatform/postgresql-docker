@@ -1,5 +1,9 @@
 FROM gcr.io/google-appengine/debian8:latest
 
+# Get the list of packages from the base image.
+COPY download_source /tmp
+RUN /tmp/download_source blacklist-all-current
+
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
 
@@ -7,11 +11,11 @@ RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
 ENV GOSU_VERSION 1.7
 RUN set -x \
 	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
-	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
-	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
-	&& wget -O gosu.tar.gz "https://github.com/tianon/gosu/archive/$GOSU_VERSION.tar.gz" \
-	&& tar -xvf gosu.tar.gz -C /usr/local/src \
-	&& rm gosu.tar.gz \
+	&& wget -q -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
+	&& wget -q -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
+# copy source code
+	&& wget -q -O /usr/local/src/gosu.tar.gz "https://github.com/tianon/gosu/archive/$GOSU_VERSION.tar.gz" \
+# extract gosu binary and check signature
 	&& export GNUPGHOME="$(mktemp -d)" \
 	&& gpg --keyserver pgp.mit.edu --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
 	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
@@ -75,3 +79,7 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
 CMD ["postgres"]
+
+# Download source code for GPL packages.
+RUN /tmp/download_source download /usr/local/src \
+	&& rm /tmp/download_source
