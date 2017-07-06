@@ -177,6 +177,8 @@ services:
     image: launcher.gcr.io/google/postgresql9
     environment:
       "POSTGRES_PASSWORD": "example-password"
+    ports:
+      - '5432:5432'
 ```
 
 Or you can use `docker run` directly:
@@ -185,6 +187,7 @@ Or you can use `docker run` directly:
 docker run \
   --name some-postgres \
   -e "POSTGRES_PASSWORD=example-password" \
+  -p 5432:5432 \
   -d \
   launcher.gcr.io/google/postgresql9
 ```
@@ -207,6 +210,8 @@ services:
     image: launcher.gcr.io/google/postgresql9
     environment:
       "POSTGRES_PASSWORD": "example-password"
+    ports:
+      - '5432:5432'
     volumes:
       - /my/persistent/dir/postgres:/var/lib/postgresql/data
 ```
@@ -217,6 +222,7 @@ Or you can use `docker run` directly:
 docker run \
   --name some-postgres \
   -e "POSTGRES_PASSWORD=example-password" \
+  -p 5432:5432 \
   -v /my/persistent/dir/postgres:/var/lib/postgresql/data \
   -d \
   launcher.gcr.io/google/postgresql9
