@@ -5,7 +5,7 @@ This image contains an installation of PostgreSQL 9.x.
 For more information, see the
 [Official Image Launcher Page](https://console.cloud.google.com/launcher/details/google/postgresql9).
 
-Pull command:
+Pull command (first install [gcloud](https://cloud.google.com/sdk/downloads)):
 
 ```shell
 gcloud docker -- pull launcher.gcr.io/google/postgresql9
@@ -39,6 +39,9 @@ Dockerfile for this image can be found [here](https://github.com/GoogleCloudPlat
 
 # <a name="using-kubernetes"></a>Using Kubernetes
 
+Consult [Launcher container documentation](https://cloud.google.com/launcher/docs/launcher-container)
+for additional information about setting up your Kubernetes environment.
+
 ## <a name="run-a-postgresql-server-kubernetes"></a>Run a PostgreSQL server
 
 This section describes how to spin up a PostgreSQL service using this image.
@@ -63,7 +66,10 @@ spec:
           value: "example-password"
 ```
 
-Run the following to expose the port:
+Run the following to expose the port.
+Depending on your cluster setup, this might expose your service to the
+Internet with an external IP address. For more information, consult
+[Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/).
 
 ```shell
 kubectl expose pod some-postgres --name some-postgres-5432 \
@@ -115,7 +121,10 @@ spec:
       storage: 5Gi
 ```
 
-Run the following to expose the port:
+Run the following to expose the port.
+Depending on your cluster setup, this might expose your service to the
+Internet with an external IP address. For more information, consult
+[Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/).
 
 ```shell
 kubectl expose pod some-postgres --name some-postgres-5432 \
@@ -161,6 +170,9 @@ kubectl exec -it some-postgres -- sh -c 'exec pg_dumpall --username postgres' > 
 
 # <a name="using-docker"></a>Using Docker
 
+Consult [Launcher container documentation](https://cloud.google.com/launcher/docs/launcher-container)
+for additional information about setting up your Docker environment.
+
 ## <a name="run-a-postgresql-server-docker"></a>Run a PostgreSQL server
 
 This section describes how to spin up a PostgreSQL service using this image.
@@ -177,6 +189,8 @@ services:
     image: launcher.gcr.io/google/postgresql9
     environment:
       "POSTGRES_PASSWORD": "example-password"
+    ports:
+      - '5432:5432'
 ```
 
 Or you can use `docker run` directly:
@@ -185,6 +199,7 @@ Or you can use `docker run` directly:
 docker run \
   --name some-postgres \
   -e "POSTGRES_PASSWORD=example-password" \
+  -p 5432:5432 \
   -d \
   launcher.gcr.io/google/postgresql9
 ```
@@ -207,6 +222,8 @@ services:
     image: launcher.gcr.io/google/postgresql9
     environment:
       "POSTGRES_PASSWORD": "example-password"
+    ports:
+      - '5432:5432'
     volumes:
       - /my/persistent/dir/postgres:/var/lib/postgresql/data
 ```
@@ -217,6 +234,7 @@ Or you can use `docker run` directly:
 docker run \
   --name some-postgres \
   -e "POSTGRES_PASSWORD=example-password" \
+  -p 5432:5432 \
   -v /my/persistent/dir/postgres:/var/lib/postgresql/data \
   -d \
   launcher.gcr.io/google/postgresql9
