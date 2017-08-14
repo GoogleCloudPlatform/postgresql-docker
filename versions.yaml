@@ -29,59 +29,59 @@ versions:
     tags:
       - latest
       - '9.6'
-      - '9.6.3'
+      - '9.6.4'
     from: *from
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.6.3-1.pgdg80+1
+        version: 9.6.4-1.pgdg80+1
         major: '9.6'
         gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
   - dir: '9/9.5'
     repo: postgresql9
     tags:
       - '9.5'
-      - '9.5.7'
+      - '9.5.8'
     from: *from
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.5.7-1.pgdg80+1
+        version: 9.5.8-1.pgdg80+1
         major: '9.5'
         gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
   - dir: '9/9.4'
     repo: postgresql9
     tags:
       - '9.4'
-      - '9.4.12'
+      - '9.4.13'
     from: *from
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.4.12-1.pgdg80+1
+        version: 9.4.13-1.pgdg80+1
         major: '9.4'
         gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
   - dir: '9/9.3'
     repo: postgresql9
     tags:
       - '9.3'
-      - '9.3.17'
+      - '9.3.18'
     from: *from
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.3.17-1.pgdg80+1
+        version: 9.3.18-1.pgdg80+1
         major: '9.3'
         gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
   - dir: '9/9.2'
     repo: postgresql9
     tags:
       - '9.2'
-      - '9.2.21'
+      - '9.2.22'
     from: *from
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.2.21-1.pgdg80+1
+        version: 9.2.22-1.pgdg80+1
         major: '9.2'
         gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
