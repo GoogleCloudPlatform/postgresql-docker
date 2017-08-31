@@ -1,14 +1,10 @@
-FROM gcr.io/google-appengine/debian8:latest
-
-# Get the list of packages from the base image.
-COPY download_source /tmp
-RUN /tmp/download_source blacklist-all-current
+FROM gcr.io/google-appengine/debian8
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
 
 # grab gosu for easy step-down from root
-ENV GOSU_VERSION 1.7
+ENV GOSU_VERSION 1.10
 RUN set -x \
 	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
 	&& wget -q -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
@@ -52,15 +48,6 @@ RUN apt-get update \
 		postgresql-contrib-$PG_MAJOR=$PG_VERSION \
 	&& rm -rf /var/lib/apt/lists/*
 
-# download source code for GPL packages
-RUN set -x \
-	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
-	&& BIND9_VER=$(apt-cache policy libdns-export100 | grep "Installed:" | sed 's/.*Installed: 1:\(.*\.dfsg\).*/\1/') \
-	&& wget -O bind.tar.gz "http://security.debian.org/debian-security/pool/updates/main/b/bind9/bind9_${BIND9_VER}.orig.tar.gz" \
-	&& tar -xvf bind.tar.gz -C /usr/local/src \
-	&& rm bind.tar.gz \
-	&& apt-get purge -y --auto-remove ca-certificates wget
-
 # make the sample config easier to munge (and "correct by default")
 RUN mv -v /usr/share/postgresql/$PG_MAJOR/postgresql.conf.sample /usr/share/postgresql/ \
 	&& ln -sv ../postgresql.conf.sample /usr/share/postgresql/$PG_MAJOR/ \
@@ -80,6 +67,3 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 5432
 CMD ["postgres"]
 
-# Download source code for GPL packages.
-RUN /tmp/download_source download /usr/local/src \
-	&& rm /tmp/download_source
