@@ -35,7 +35,7 @@ versions:
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.6.5-1.pgdg80+1
+        version: 9.6.5-1.pgdg80+2
         major: '9.6'
         gpg: *gpg
   - dir: '9/9.5'
