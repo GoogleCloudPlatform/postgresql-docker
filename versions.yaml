@@ -35,7 +35,7 @@ versions:
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.6.5-1.pgdg80+2
+        version: 9.6.5*
         major: '9.6'
         gpg: *gpg
   - dir: '9/9.5'
@@ -47,7 +47,7 @@ versions:
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.5.9-1.pgdg80+1
+        version: 9.5.9*
         major: '9.5'
         gpg: *gpg
   - dir: '9/9.4'
@@ -59,7 +59,7 @@ versions:
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.4.14-1.pgdg80+1
+        version: 9.4.14*
         major: '9.4'
         gpg: *gpg
   - dir: '9/9.3'
@@ -71,7 +71,7 @@ versions:
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.3.19-1.pgdg80+1
+        version: 9.3.19*
         major: '9.3'
         gpg: *gpg
   - dir: '9/9.2'
@@ -83,6 +83,6 @@ versions:
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.2.23-1.pgdg80+1
+        version: 9.2.23*
         major: '9.2'
         gpg: *gpg
