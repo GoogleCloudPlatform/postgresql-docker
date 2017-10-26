@@ -18,23 +18,29 @@
 # ENHANCEMENTS, OR MODIFICATIONS.
 
 setup:
-- command: [docker, network, create, -d, bridge, testbridge]
-- command: [docker, run, --net, testbridge, --name, some-postgres-server, -e, 'POSTGRES_PASSWORD=example-password', -d, '$IMAGE']
-- command: [docker, run, --net, testbridge, --name, some-postgres-client, -d, '$IMAGE']
-- command: [sleep, 30s]
+- command:
+    - touch /tmp/init-script.sh && echo 'touch /tmp/functional_tests.lock' > /tmp/init-script.sh
+- command:
+    - chmod
+    - 644
+    - '/tmp/init-script.sh'
+- command:
+    - docker
+    - run
+    - '--privileged=true'
+    - '--name=some-postgres'
+    - '--detach'
+    - '--volume=/tmp/init-script.sh:/docker-entrypoint-initdb.d/init-script.sh'
+    - '$IMAGE'
+- command:
+    - sleep
+    - 15s
 
 teardown:
-- command: [docker, stop, some-postgres-server, some-postgres-client]
-- command: [docker, rm, some-postgres-server, some-postgres-client]
-- command: [docker, network, rm, testbridge]
+- command: [docker, stop, some-postgres]
+- command: [docker, rm, some-postgres]
 
-target: some-postgres-client
+target: some-postgres
 tests:
-- name: Can connect to remote host
-  command:
-    - sh
-    - '-c'
-    - 'PGPASSWORD=example-password psql --host=some-postgres-server --username=postgres --list'
-  expect:
-    stdout:
-      matches: List of databases
+- name: Does lock file exists
+  command: [test, -f, '/tmp/functional_tests.lock']
