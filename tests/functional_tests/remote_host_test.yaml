@@ -19,7 +19,7 @@
 
 setup:
 - command: [docker, network, create, -d, bridge, testbridge]
-- command: [docker, run, --net, testbridge, --name, some-postgres-server, -e, 'POSTGRES_PASSWORD=example-password', -d, '$IMAGE']
+- command: [docker, run, --net, testbridge, --name, some-postgres-server, -e, 'POSTGRES_PASSWORD=example-password', -e, 'POSTGRES_USER=testuser', -e, 'POSTGRES_DB=testdb', -d, '$IMAGE']
 - command: [docker, run, --net, testbridge, --name, some-postgres-client, -d, '$IMAGE']
 - command: [sleep, 30s]
 
@@ -34,7 +34,7 @@ tests:
   command:
      - sh
      - '-c'
-     - 'PGPASSWORD=example-password psql --host=some-postgres-server --username=postgres --list'
+     - 'PGPASSWORD=example-password psql --host=some-postgres-server --username=testuser --dbname=testdb --list'
   expect:
     stdout:
       matches: List of databases
