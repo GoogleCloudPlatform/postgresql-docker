@@ -3,6 +3,16 @@ FROM gcr.io/google-appengine/debian8
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
 
+RUN set -ex; \
+        if ! command -v gpg > /dev/null; then \
+                apt-get update; \
+                apt-get install -y --no-install-recommends \
+                        gnupg \
+                        dirmngr \
+                ; \
+                rm -rf /var/lib/apt/lists/*; \
+        fi
+
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.10
 RUN set -x \
@@ -13,9 +23,9 @@ RUN set -x \
 	&& wget -q -O /usr/local/src/gosu.tar.gz "https://github.com/tianon/gosu/archive/$GOSU_VERSION.tar.gz" \
 # extract gosu binary and check signature
 	&& export GNUPGHOME="$(mktemp -d)" \
-	&& gpg --keyserver na.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
 	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-	&& rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+	&& rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc \
 	&& chmod +x /usr/local/bin/gosu \
 	&& gosu nobody true \
 	&& apt-get purge -y --auto-remove ca-certificates wget
@@ -30,14 +40,13 @@ RUN mkdir /docker-entrypoint-initdb.d
 RUN set -ex; \
 	key='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8'; \
 	export GNUPGHOME="$(mktemp -d)"; \
-	gpg --keyserver na.pool.sks-keyservers.net --recv-keys "$key"; \
+	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
 	gpg --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
-	rm -r "$GNUPGHOME"; \
+	rm -rf "$GNUPGHOME"; \
 	apt-key list
 
 ENV PG_MAJOR 9.2
 ENV PG_VERSION 9.2.24*
-
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update \
