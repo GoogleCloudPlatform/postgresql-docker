@@ -289,7 +289,7 @@ These are the environment variables understood by the container image.
 | PGDATA | Optionally specifies the directory location of the database files. Defaults to `/var/lib/postgresql/data`. |
 | POSTGRES_DB | Optionally specifies the name of the default database to be created when the image is first started. Defaults to the value of `POSTGRES_USER`. |
 | POSTGRES_INITDB_ARGS | Optionally specifies arguments to send to `postgres initdb`. For example. `--data-checksums --encoding=UTF8`. |
-| POSTGRES_INITDB_XLOGDIR | Optionally specifies a location for the Postgres transaction log. Defaults to a subdirectory of the main Postgres data folder (`PGDATA`). |
+| POSTGRES_INITDB_WALDIR | Optionally specifies a location for the Postgres transaction log. Defaults to a subdirectory of the main Postgres data folder (`PGDATA`). |
 
 ## <a name="references-volumes"></a>Volumes
 

@@ -158,7 +158,7 @@ environmentVariableReference:
     description: >-
       Optionally specifies arguments to send to `postgres initdb`. For example.
       `--data-checksums --encoding=UTF8`.
-  - name: POSTGRES_INITDB_XLOGDIR
+  - name: POSTGRES_INITDB_WALDIR
     description: >-
       Optionally specifies a location for the Postgres transaction log. Defaults to
       a subdirectory of the main Postgres data folder (`PGDATA`).
