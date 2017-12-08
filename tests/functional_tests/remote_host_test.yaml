@@ -18,23 +18,23 @@
 # ENHANCEMENTS, OR MODIFICATIONS.
 
 setup:
-- command: [docker, network, create, -d, bridge, testbridge]
-- command: [docker, run, --net, testbridge, --name, some-postgres-server, -e, 'POSTGRES_PASSWORD=example-password', -e, 'POSTGRES_USER=testuser', -e, 'POSTGRES_DB=testdb', -d, '$IMAGE']
-- command: [docker, run, --net, testbridge, --name, some-postgres-client, -d, '$IMAGE']
+- command: [docker, network, create, -d, bridge, testbridge-$UNIQUE-id]
+- command: [docker, run, --net, testbridge-$UNIQUE-id, --name, some-postgres-server-$UNIQUE-id, -e, 'POSTGRES_PASSWORD=example-password', -e, 'POSTGRES_USER=testuser', -e, 'POSTGRES_DB=testdb', -d, '$IMAGE']
+- command: [docker, run, --net, testbridge-$UNIQUE-id, --name, some-postgres-client-$UNIQUE-id, -d, '$IMAGE']
 - command: [sleep, 30s]
 
 teardown:
-- command: [docker, stop, some-postgres-server, some-postgres-client]
-- command: [docker, rm, some-postgres-server, some-postgres-client]
-- command: [docker, network, rm, testbridge]
+- command: [docker, stop, some-postgres-server-$UNIQUE-id, some-postgres-client-$UNIQUE-id]
+- command: [docker, rm, some-postgres-server-$UNIQUE-id, some-postgres-client-$UNIQUE-id]
+- command: [docker, network, rm, testbridge-$UNIQUE-id]
 
-target: some-postgres-client
+target: some-postgres-client-$UNIQUE-id
 tests:
 - name: Can connect to remote host
   command:
      - sh
      - '-c'
-     - 'PGPASSWORD=example-password psql --host=some-postgres-server --username=testuser --dbname=testdb --list'
+     - 'PGPASSWORD=example-password psql --host=some-postgres-server-$UNIQUE-id --username=testuser --dbname=testdb --list'
   expect:
     stdout:
       matches: List of databases

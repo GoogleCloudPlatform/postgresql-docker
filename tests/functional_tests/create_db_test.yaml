@@ -18,14 +18,14 @@
 # ENHANCEMENTS, OR MODIFICATIONS.
 
 setup:
-- command: [docker, run, --privileged=true, --name, some-postgres, -d, '$IMAGE']
+- command: [docker, run, --privileged=true, --name, some-postgres-$UNIQUE-id, -d, '$IMAGE']
 - command: [sleep, 15s]
 
 teardown:
-- command: [docker, stop, some-postgres]
-- command: [docker, rm, some-postgres]
+- command: [docker, stop, some-postgres-$UNIQUE-id]
+- command: [docker, rm, some-postgres-$UNIQUE-id]
 
-target: some-postgres
+target: some-postgres-$UNIQUE-id
 tests:
 - name: Create a database
   command: [psql, --username, postgres, -c, 'CREATE DATABASE testdb']
