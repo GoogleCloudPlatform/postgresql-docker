@@ -20,74 +20,75 @@
 _variables:
   from8: &from8 gcr.io/google-appengine/debian8
   from9: &from9 gcr.io/google-appengine/debian9
-  gpg: &gpg B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
   gosu: &gosu
     version: '1.10'
     gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
+  postgresql: &postgresql
+    gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
 
 versions:
   - dir: '10'
     repo: postgresql10
     tags:
-      - '10.2'
+      - '10.1'
       - '10'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 10.2-1.pgdg90+1
+        <<: *postgresql
+        version: 10.1-1.pgdg90+1
         major: '10'
-        gpg: *gpg
   - dir: '9/9.6'
     repo: postgresql9
     tags:
-      - '9.6.7'
+      - '9.6.6'
       - '9.6'
       - 'latest'
     from: *from8
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.6.7*
+        <<: *postgresql
+        version: 9.6.6*
         major: '9.6'
-        gpg: *gpg
   - dir: '9/9.5'
     repo: postgresql9
     tags:
-      - '9.5.11'
+      - '9.5.10'
       - '9.5'
     from: *from8
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.5.11*
+        <<: *postgresql
+        version: 9.5.10*
         major: '9.5'
-        gpg: *gpg
   - dir: '9/9.4'
     repo: postgresql9
     tags:
-      - '9.4.16'
+      - '9.4.15'
       - '9.4'
     from: *from8
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.4.16*
+        <<: *postgresql
+        version: 9.4.15*
         major: '9.4'
-        gpg: *gpg
   - dir: '9/9.3'
     repo: postgresql9
     tags:
-      - '9.3.21'
+      - '9.3.20'
       - '9.3'
     from: *from8
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.3.21*
+        <<: *postgresql
+        version: 9.3.20*
         major: '9.3'
-        gpg: *gpg
   - dir: '9/9.2'
     repo: postgresql9
     tags:
@@ -97,6 +98,6 @@ versions:
     packages:
       gosu: *gosu
       postgresql:
+        <<: *postgresql
         version: 9.2.24*
         major: '9.2'
-        gpg: *gpg
