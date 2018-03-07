@@ -26,7 +26,7 @@ RUN set -x \
 # extract gosu binary and check signature
 	&& export GNUPGHOME="$(mktemp -d)" \
 	&& export GOSU_GPG={{ $gosu.Gpg }} \
-	&& {{ `gpg --keyserver $server --recv-keys $GOSU_GPG` | KeyServersRetryLoop "\t" | indent "\t" }} \
+	&& {{ `gpg --keyserver $server --recv-keys $GOSU_GPG` | KeyServersRetryLoop "\t" }} \
 	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
 	&& rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc \
 	&& chmod +x /usr/local/bin/gosu \
@@ -43,7 +43,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 RUN set -ex; \
 	key='{{ $postgresql.Gpg }}'; \
 	export GNUPGHOME="$(mktemp -d)"; \
-	{{ `gpg --keyserver ${server} --recv-keys "$key"` | KeyServersRetryLoop "\t" | indent "\t" }}; \
+	{{ `gpg --keyserver ${server} --recv-keys "$key"` | KeyServersRetryLoop "\t" }}; \
 	gpg --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
 	rm -rf "$GNUPGHOME"; \
 	apt-key list
