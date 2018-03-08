@@ -29,63 +29,63 @@ versions:
   - dir: '10'
     repo: postgresql10
     tags:
-      - '10.2'
+      - '10.3'
       - '10'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 10.2-1.pgdg90+1
+        version: 10.3-1.pgdg90+1
         major: '10'
         gpg: *gpg
   - dir: '9/9.6'
     repo: postgresql9
     tags:
-      - '9.6.7'
+      - '9.6.8'
       - '9.6'
       - 'latest'
     from: *from8
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.6.7*
+        version: 9.6.8*
         major: '9.6'
         gpg: *gpg
   - dir: '9/9.5'
     repo: postgresql9
     tags:
-      - '9.5.11'
+      - '9.5.12'
       - '9.5'
     from: *from8
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.5.11*
+        version: 9.5.12*
         major: '9.5'
         gpg: *gpg
   - dir: '9/9.4'
     repo: postgresql9
     tags:
-      - '9.4.16'
+      - '9.4.17'
       - '9.4'
     from: *from8
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.4.16*
+        version: 9.4.17*
         major: '9.4'
         gpg: *gpg
   - dir: '9/9.3'
     repo: postgresql9
     tags:
-      - '9.3.21'
+      - '9.3.22'
       - '9.3'
     from: *from8
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.3.21*
+        version: 9.3.22*
         major: '9.3'
         gpg: *gpg
   - dir: '9/9.2'
