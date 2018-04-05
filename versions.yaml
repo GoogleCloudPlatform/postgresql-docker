@@ -88,15 +88,3 @@ versions:
         version: 9.3.22*
         major: '9.3'
         gpg: *gpg
-  - dir: '9/9.2'
-    repo: postgresql9
-    tags:
-      - '9.2.24'
-      - '9.2'
-    from: *from8
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: 9.2.24*
-        major: '9.2'
-        gpg: *gpg
