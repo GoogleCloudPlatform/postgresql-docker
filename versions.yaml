@@ -100,3 +100,6 @@ versions:
         version: 9.2.24*
         major: '9.2'
         gpg: *gpg
+
+cloudbuild:
+  enable_parallel: true
