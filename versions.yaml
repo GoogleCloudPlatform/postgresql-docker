@@ -18,7 +18,6 @@
 # ENHANCEMENTS, OR MODIFICATIONS.
 
 _variables:
-  from8: &from8 gcr.io/google-appengine/debian8
   from9: &from9 gcr.io/google-appengine/debian9
   gpg: &gpg B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
   gosu: &gosu
@@ -36,7 +35,7 @@ versions:
     packages:
       gosu: *gosu
       postgresql:
-        version: 10.5-1.pgdg90+1
+        version: 10.5*
         major: '10'
         gpg: *gpg
   - dir: '9/9.6'
@@ -45,7 +44,7 @@ versions:
       - '9.6.10'
       - '9.6'
       - 'latest'
-    from: *from8
+    from: *from9
     packages:
       gosu: *gosu
       postgresql:
@@ -57,7 +56,7 @@ versions:
     tags:
       - '9.5.14'
       - '9.5'
-    from: *from8
+    from: *from9
     packages:
       gosu: *gosu
       postgresql:
@@ -69,7 +68,7 @@ versions:
     tags:
       - '9.4.19'
       - '9.4'
-    from: *from8
+    from: *from9
     packages:
       gosu: *gosu
       postgresql:
@@ -81,7 +80,7 @@ versions:
     tags:
       - '9.3.24'
       - '9.3'
-    from: *from8
+    from: *from9
     packages:
       gosu: *gosu
       postgresql:
@@ -93,7 +92,7 @@ versions:
     tags:
       - '9.2.24'
       - '9.2'
-    from: *from8
+    from: *from9
     packages:
       gosu: *gosu
       postgresql:

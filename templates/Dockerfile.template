@@ -80,11 +80,7 @@ RUN set -ex; \
 ENV PG_MAJOR {{ $postgresql.Major }}
 ENV PG_VERSION {{ $postgresql.Version }}
 
-{{- if (eq .Repo "postgresql9") }}
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
-{{- else }}
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
-{{- end }}
 
 RUN apt-get update \
 	&& apt-get install -y postgresql-common \
@@ -92,9 +88,7 @@ RUN apt-get update \
 	&& apt-get install -y \
 		postgresql-$PG_MAJOR=$PG_VERSION \
 {{- if (eq .Repo "postgresql9") }}
-		postgresql-contrib-$PG_MAJOR=$PG_VERSION \
-{{- else }}
-		postgresql-contrib \
+                postgresql-contrib-$PG_MAJOR=$PG_VERSION \
 {{- end }}
 	&& rm -rf /var/lib/apt/lists/*
 
