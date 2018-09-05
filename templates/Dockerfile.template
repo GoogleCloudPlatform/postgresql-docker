@@ -88,7 +88,7 @@ RUN apt-get update \
 	&& apt-get install -y \
 		postgresql-$PG_MAJOR=$PG_VERSION \
 {{- if (eq .Repo "postgresql9") }}
-                postgresql-contrib-$PG_MAJOR=$PG_VERSION \
+		postgresql-contrib-$PG_MAJOR=$PG_VERSION \
 {{- end }}
 	&& rm -rf /var/lib/apt/lists/*
 
