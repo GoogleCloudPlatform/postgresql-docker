@@ -1,4 +1,4 @@
-FROM gcr.io/google-appengine/debian8
+FROM gcr.io/google-appengine/debian9
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
@@ -76,7 +76,8 @@ RUN set -ex; \
 
 ENV PG_MAJOR 9.4
 ENV PG_VERSION 9.4.19*
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
+
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update \
 	&& apt-get install -y postgresql-common \
