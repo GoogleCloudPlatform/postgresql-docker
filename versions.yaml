@@ -28,10 +28,10 @@ versions:
   - dir: '10'
     repo: postgresql10
     tags:
-      - '10.5'
-      - '10'
       - '10.5-debian9'
       - '10-debian9'
+      - '10.5'
+      - '10'
       - 'latest'
     from: *from9
     packages:
@@ -43,10 +43,10 @@ versions:
   - dir: '9/9.6'
     repo: postgresql9
     tags:
-      - '9.6.10'
-      - '9.6'
       - '9.6.10-debian9'
       - '9.6-debian9'
+      - '9.6.10'
+      - '9.6'
       - 'latest'
     from: *from9
     packages:
@@ -58,10 +58,10 @@ versions:
   - dir: '9/9.5'
     repo: postgresql9
     tags:
-      - '9.5.14'
-      - '9.5'
       - '9.5.14-debian9'
       - '9.5-debian9'
+      - '9.5.14'
+      - '9.5'
     from: *from9
     packages:
       gosu: *gosu
@@ -72,10 +72,10 @@ versions:
   - dir: '9/9.4'
     repo: postgresql9
     tags:
-      - '9.4.19'
-      - '9.4'
       - '9.4.19-debian9'
       - '9.4-debian9'
+      - '9.4.19'
+      - '9.4'
     from: *from9
     packages:
       gosu: *gosu
@@ -86,10 +86,10 @@ versions:
   - dir: '9/9.3'
     repo: postgresql9
     tags:
-      - '9.3.24'
-      - '9.3'
       - '9.3.24-debian9'
       - '9.3-debian9'
+      - '9.3.24'
+      - '9.3'
     from: *from9
     packages:
       gosu: *gosu
@@ -100,10 +100,10 @@ versions:
   - dir: '9/9.2'
     repo: postgresql9
     tags:
-      - '9.2.24'
-      - '9.2'
       - '9.2.24-debian9'
       - '9.2-debian9'
+      - '9.2.24'
+      - '9.2'
     from: *from9
     packages:
       gosu: *gosu
