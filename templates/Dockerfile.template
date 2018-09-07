@@ -2,6 +2,7 @@ FROM {{ .From }}
 
 {{- $gosu := index .Packages "gosu" }}
 {{- $postgresql := index .Packages "postgresql" }}
+{{- $kubernetes := index .TemplateArgs "kubernetes" }}
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
@@ -105,6 +106,9 @@ RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PG
 VOLUME /var/lib/postgresql/data
 
 COPY docker-entrypoint.sh /usr/local/bin/
+{{- if (eq $kubernetes "true") }}
+COPY tls-configuration.sh /docker-entrypoint-initdb.d/
+{{- end }}
 RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
 ENTRYPOINT ["docker-entrypoint.sh"]
 

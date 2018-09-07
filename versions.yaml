@@ -27,6 +27,8 @@ _variables:
 versions:
   - dir: '10'
     repo: postgresql10
+    templateArgs:
+      kubernetes: 'false'
     tags:
       - '10.5-debian9'
       - '10-debian9'
@@ -42,6 +44,8 @@ versions:
         gpg: *gpg
   - dir: '9/9.6'
     repo: postgresql9
+    templateArgs:
+      kubernetes: 'false'
     tags:
       - '9.6.10-debian9'
       - '9.6-debian9'
@@ -57,6 +61,8 @@ versions:
         gpg: *gpg
   - dir: '9/9.5'
     repo: postgresql9
+    templateArgs:
+      kubernetes: 'false'
     tags:
       - '9.5.14-debian9'
       - '9.5-debian9'
@@ -71,6 +77,8 @@ versions:
         gpg: *gpg
   - dir: '9/9.4'
     repo: postgresql9
+    templateArgs:
+      kubernetes: 'false'
     tags:
       - '9.4.19-debian9'
       - '9.4-debian9'
@@ -85,6 +93,8 @@ versions:
         gpg: *gpg
   - dir: '9/9.3'
     repo: postgresql9
+    templateArgs:
+      kubernetes: 'false'
     tags:
       - '9.3.24-debian9'
       - '9.3-debian9'
@@ -99,6 +109,8 @@ versions:
         gpg: *gpg
   - dir: '9/9.2'
     repo: postgresql9
+    templateArgs:
+      kubernetes: 'false'
     tags:
       - '9.2.24-debian9'
       - '9.2-debian9'
@@ -111,6 +123,29 @@ versions:
         version: 9.2.24*
         major: '9.2'
         gpg: *gpg
+
+
+  ## for Kubernetes App ##
+
+  - dir: '9/9.6/kubernetes-app'
+    repo: postgresql9
+    templateArgs:
+      kubernetes: 'true'
+    tags:
+      - '9.6.10-debian9-kubernetes'
+      - '9.6-debian9-kubernetes'
+      - '9.6.10-kubernetes'
+      - '9.6-kubernetes'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: '9.6.10*'
+        major: '9.6'
+        gpg: *gpg
+
+  ## end Kubernetes App ##
+
 
 cloudbuild:
   enable_parallel: true
