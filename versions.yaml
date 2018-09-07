@@ -124,6 +124,7 @@ versions:
       - '9.6-debian9-kubernetes'
       - '9.6.10-kubernetes'
       - '9.6-kubernetes'
+      - 'kubernetes'
     from: *from9
     packages:
       gosu: *gosu
