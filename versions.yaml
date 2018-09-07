@@ -27,8 +27,6 @@ _variables:
 versions:
   - dir: '10'
     repo: postgresql10
-    templateArgs:
-      kubernetes: 'false'
     tags:
       - '10.5-debian9'
       - '10-debian9'
@@ -44,8 +42,6 @@ versions:
         gpg: *gpg
   - dir: '9/9.6'
     repo: postgresql9
-    templateArgs:
-      kubernetes: 'false'
     tags:
       - '9.6.10-debian9'
       - '9.6-debian9'
@@ -61,8 +57,6 @@ versions:
         gpg: *gpg
   - dir: '9/9.5'
     repo: postgresql9
-    templateArgs:
-      kubernetes: 'false'
     tags:
       - '9.5.14-debian9'
       - '9.5-debian9'
@@ -77,8 +71,6 @@ versions:
         gpg: *gpg
   - dir: '9/9.4'
     repo: postgresql9
-    templateArgs:
-      kubernetes: 'false'
     tags:
       - '9.4.19-debian9'
       - '9.4-debian9'
@@ -93,8 +85,6 @@ versions:
         gpg: *gpg
   - dir: '9/9.3'
     repo: postgresql9
-    templateArgs:
-      kubernetes: 'false'
     tags:
       - '9.3.24-debian9'
       - '9.3-debian9'
@@ -109,8 +99,6 @@ versions:
         gpg: *gpg
   - dir: '9/9.2'
     repo: postgresql9
-    templateArgs:
-      kubernetes: 'false'
     tags:
       - '9.2.24-debian9'
       - '9.2-debian9'
