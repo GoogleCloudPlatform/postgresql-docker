@@ -112,5 +112,29 @@ versions:
         major: '9.2'
         gpg: *gpg
 
+
+  ## for Kubernetes App ##
+
+  - dir: '9/9.6/kubernetes-app'
+    repo: postgresql9
+    templateArgs:
+      kubernetes: 'true'
+    tags:
+      - '9.6.10-debian9-kubernetes'
+      - '9.6-debian9-kubernetes'
+      - '9.6.10-kubernetes'
+      - '9.6-kubernetes'
+      - 'kubernetes'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: '9.6.10*'
+        major: '9.6'
+        gpg: *gpg
+
+  ## end Kubernetes App ##
+
+
 cloudbuild:
   enable_parallel: true

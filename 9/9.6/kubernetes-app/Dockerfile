@@ -1,8 +1,4 @@
-FROM {{ .From }}
-
-{{- $gosu := index .Packages "gosu" }}
-{{- $postgresql := index .Packages "postgresql" }}
-{{- $kubernetes := index .TemplateArgs "kubernetes" }}
+FROM gcr.io/google-appengine/debian9
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
@@ -18,7 +14,7 @@ RUN set -ex; \
         fi
 
 # grab gosu for easy step-down from root
-ENV GOSU_VERSION {{ $gosu.Version }}
+ENV GOSU_VERSION 1.10
 RUN set -x \
 	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
 	&& wget -q -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
@@ -39,7 +35,7 @@ RUN set -x \
 		hkp://p80.pool.sks-keyservers.net:80 \
 		hkp://keyserver.ubuntu.com:80 \
 	; do \
-		gpg --keyserver $server --recv-keys {{ $gosu.Gpg }} \
+		gpg --keyserver $server --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
 			&& found="yes" && break; \
 	done; test -n "$found" \
 	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
@@ -56,7 +52,7 @@ ENV LANG en_US.utf8
 RUN mkdir /docker-entrypoint-initdb.d
 
 RUN set -ex; \
-	key='{{ $postgresql.Gpg }}'; \
+	key='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8'; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	found=''; \
 	for server in \
@@ -78,8 +74,8 @@ RUN set -ex; \
 	rm -rf "$GNUPGHOME"; \
 	apt-key list
 
-ENV PG_MAJOR {{ $postgresql.Major }}
-ENV PG_VERSION {{ $postgresql.Version }}
+ENV PG_MAJOR 9.6
+ENV PG_VERSION 9.6.10*
 
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
@@ -88,9 +84,7 @@ RUN apt-get update \
 	&& sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf \
 	&& apt-get install -y \
 		postgresql-$PG_MAJOR=$PG_VERSION \
-{{- if (eq .Repo "postgresql9") }}
 		postgresql-contrib-$PG_MAJOR=$PG_VERSION \
-{{- end }}
 	&& rm -rf /var/lib/apt/lists/*
 
 # make the sample config easier to munge (and "correct by default")
@@ -106,9 +100,7 @@ RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PG
 VOLUME /var/lib/postgresql/data
 
 COPY docker-entrypoint.sh /usr/local/bin/
-{{- if (eq $kubernetes "true") }}
 COPY tls-configuration.sh /docker-entrypoint-initdb.d/
-{{- end }}
 RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
 ENTRYPOINT ["docker-entrypoint.sh"]
 
