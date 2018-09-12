@@ -26,7 +26,7 @@
 # if POSTGRES_TLS_LOCATION begins with / -- it's absolute
 # otherwise the location will be $PGDATA/$POSTGRES_TLS_LOCATION
 
-pgdata=${PGDATA:+/var/lib/postgresql/data}
+pgdata=${PGDATA:-/var/lib/postgresql/data}
 tlslocation=$pgdata/../tls
 if [[ -v POSTGRES_TLS_LOCATION ]]; then
 	if [[ ${POSTGRES_TLS_LOCATION##/*} ]]; then		## doesn't begin with /
