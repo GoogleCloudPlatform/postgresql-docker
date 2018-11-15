@@ -75,7 +75,7 @@ RUN set -ex; \
 	apt-key list
 
 ENV PG_MAJOR 9.3
-ENV PG_VERSION 9.3.24*
+ENV PG_VERSION 9.3.25*
 
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
