@@ -74,7 +74,7 @@ RUN set -ex; \
 			&& found="yes" && break; \
 	done; \
 	test -n "$found"; \
-	gpg --no-tty --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
+	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
 	rm -rf "$GNUPGHOME"; \
 	apt-key list
 
