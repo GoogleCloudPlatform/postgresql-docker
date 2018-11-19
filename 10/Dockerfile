@@ -35,7 +35,7 @@ RUN set -x \
 		hkp://p80.pool.sks-keyservers.net:80 \
 		hkp://keyserver.ubuntu.com:80 \
 	; do \
-		gpg --keyserver $server --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+		gpg --batch --keyserver $server --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
 			&& found="yes" && break; \
 	done; test -n "$found" \
 	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
@@ -66,11 +66,11 @@ RUN set -ex; \
 		hkp://p80.pool.sks-keyservers.net:80 \
 		hkp://keyserver.ubuntu.com:80 \
 	; do \
-		gpg --keyserver ${server} --recv-keys "$key" \
+		gpg --batch --keyserver ${server} --recv-keys "$key" \
 			&& found="yes" && break; \
 	done; \
 	test -n "$found"; \
-	gpg --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
+	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
 	rm -rf "$GNUPGHOME"; \
 	apt-key list
 
