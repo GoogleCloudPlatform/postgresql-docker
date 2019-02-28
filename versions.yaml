@@ -25,6 +25,21 @@ _variables:
     gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
 
 versions:
+  - dir: '11'
+    repo: postgresql11
+    tags:
+      - '11.2-debian9'
+      - '11-debian9'
+      - '11.2'
+      - '11'
+      - 'latest'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: 11.2*
+        major: '11'
+        gpg: *gpg
   - dir: '10'
     repo: postgresql10
     tags:
