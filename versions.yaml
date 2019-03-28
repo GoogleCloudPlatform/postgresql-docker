@@ -172,9 +172,8 @@ versions:
     repo: postgresql9
     templateSubDir: exporter
     tags:
-      - '0.4.7'
-      - '0.4.7-prometheus-exporter'
-      - 'prometheus-exporter'
+      - 'exporter'
+      - 'exporter-0.4.7'
     from: *from9
     packages:
       postgres_exporter:
