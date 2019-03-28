@@ -40,6 +40,8 @@ versions:
         version: 11.2*
         major: '11'
         gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
   - dir: '10'
     repo: postgresql10
     tags:
@@ -55,6 +57,8 @@ versions:
         version: 10.7*
         major: '10'
         gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
   - dir: '9/9.6'
     repo: postgresql9
     tags:
@@ -70,6 +74,8 @@ versions:
         version: 9.6.12*
         major: '9.6'
         gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
   - dir: '9/9.5'
     repo: postgresql9
     tags:
@@ -84,6 +90,8 @@ versions:
         version: 9.5.16*
         major: '9.5'
         gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
   - dir: '9/9.4'
     repo: postgresql9
     tags:
@@ -98,6 +106,8 @@ versions:
         version: 9.4.21*
         major: '9.4'
         gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
   - dir: '9/9.3'
     repo: postgresql9
     tags:
@@ -112,6 +122,8 @@ versions:
         version: 9.3.25*
         major: '9.3'
         gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
   - dir: '9/9.2'
     repo: postgresql9
     tags:
@@ -126,6 +138,8 @@ versions:
         version: 9.2.24*
         major: '9.2'
         gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
 
 
   ## for Kubernetes App ##
@@ -147,6 +161,26 @@ versions:
         version: '9.6.12*'
         major: '9.6'
         gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
 
   ## end Kubernetes App ##
 
+  ## for Prometheus Exporter ##
+
+  - dir: 'exporter'
+    repo: postgresql9
+    templateSubDir: exporter
+    tags:
+      - '0.4.7'
+      - '0.4.7-prometheus-exporter'
+      - 'prometheus-exporter'
+    from: *from9
+    packages:
+      postgres_exporter:
+        version: '0.4.7'
+    excludeTests:
+    - tests/functional_tests/create_db_test.yaml
+    - tests/functional_tests/remote_host_test.yaml
+
+  ## end Prometheus Exporter ##

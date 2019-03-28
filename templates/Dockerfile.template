@@ -1,5 +1,4 @@
 FROM {{ .From }}
-
 {{- $gosu := index .Packages "gosu" }}
 {{- $postgresql := index .Packages "postgresql" }}
 {{- $kubernetes := index .TemplateArgs "kubernetes" }}
