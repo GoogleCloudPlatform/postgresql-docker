@@ -43,8 +43,6 @@ versions:
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
   - dir: '10'
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
     repo: postgresql10
     tags:
       - '10.7-debian9'
@@ -170,10 +168,9 @@ versions:
 
   ## for Prometheus Exporter ##
 
-  - dir: 'exporter/'
-    repo: postgres_exporter
-    templateArgs:
-      exporter: 'true'
+  - dir: 'exporter'
+    repo: postgresql9
+    templateSubDir: exporter
     tags:
       - '0.4.7'
       - '0.4.7-prometheus-exporter'
