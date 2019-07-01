@@ -28,16 +28,16 @@ versions:
   - dir: '11'
     repo: postgresql11
     tags:
-      - '11.3-debian9'
+      - '11.4-debian9'
       - '11-debian9'
-      - '11.3'
+      - '11.4'
       - '11'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 11.3*
+        version: 11.4*
         major: '11'
         gpg: *gpg
     excludeTests:
@@ -45,16 +45,16 @@ versions:
   - dir: '10'
     repo: postgresql10
     tags:
-      - '10.8-debian9'
+      - '10.9-debian9'
       - '10-debian9'
-      - '10.8'
+      - '10.9'
       - '10'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 10.8*
+        version: 10.9*
         major: '10'
         gpg: *gpg
     excludeTests:
@@ -62,16 +62,16 @@ versions:
   - dir: '9/9.6'
     repo: postgresql9
     tags:
-      - '9.6.13-debian9'
+      - '9.6.14-debian9'
       - '9.6-debian9'
-      - '9.6.13'
+      - '9.6.14'
       - '9.6'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.6.13*
+        version: 9.6.14*
         major: '9.6'
         gpg: *gpg
     excludeTests:
@@ -79,15 +79,15 @@ versions:
   - dir: '9/9.5'
     repo: postgresql9
     tags:
-      - '9.5.17-debian9'
+      - '9.5.18-debian9'
       - '9.5-debian9'
-      - '9.5.17'
+      - '9.5.18'
       - '9.5'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.5.17*
+        version: 9.5.18*
         major: '9.5'
         gpg: *gpg
     excludeTests:
@@ -95,48 +95,16 @@ versions:
   - dir: '9/9.4'
     repo: postgresql9
     tags:
-      - '9.4.22-debian9'
+      - '9.4.23-debian9'
       - '9.4-debian9'
-      - '9.4.22'
+      - '9.4.23'
       - '9.4'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.4.22*
+        version: 9.4.23*
         major: '9.4'
-        gpg: *gpg
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
-  - dir: '9/9.3'
-    repo: postgresql9
-    tags:
-      - '9.3.25-debian9'
-      - '9.3-debian9'
-      - '9.3.25'
-      - '9.3'
-    from: *from9
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: 9.3.25*
-        major: '9.3'
-        gpg: *gpg
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
-  - dir: '9/9.2'
-    repo: postgresql9
-    tags:
-      - '9.2.24-debian9'
-      - '9.2-debian9'
-      - '9.2.24'
-      - '9.2'
-    from: *from9
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: 9.2.24*
-        major: '9.2'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
@@ -149,16 +117,16 @@ versions:
     templateArgs:
       kubernetes: 'true'
     tags:
-      - '9.6.13-debian9-kubernetes'
+      - '9.6.14-debian9-kubernetes'
       - '9.6-debian9-kubernetes'
-      - '9.6.13-kubernetes'
+      - '9.6.14-kubernetes'
       - '9.6-kubernetes'
       - 'kubernetes'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: '9.6.13*'
+        version: '9.6.14*'
         major: '9.6'
         gpg: *gpg
     excludeTests:
