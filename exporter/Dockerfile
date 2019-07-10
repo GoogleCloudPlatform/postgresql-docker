@@ -1,6 +1,6 @@
 FROM gcr.io/google-appengine/debian9
 
-ARG EXPORTER_VERSION=0.4.7
+ARG EXPORTER_VERSION=0.5.0
 RUN env && apt-get update && \
 	apt-get install -y wget && \
 	wget https://github.com/wrouesnel/postgres_exporter/releases/download/v${EXPORTER_VERSION}/postgres_exporter_v${EXPORTER_VERSION}_linux-amd64.tar.gz && \
