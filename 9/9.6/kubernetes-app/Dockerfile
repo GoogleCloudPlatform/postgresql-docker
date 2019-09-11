@@ -15,6 +15,7 @@ RUN set -ex; \
 
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.10
+
 RUN set -x \
 	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
 	&& wget -q -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
@@ -76,6 +77,8 @@ RUN set -ex; \
 
 ENV PG_MAJOR 9.6
 ENV PG_VERSION 9.6.15*
+ENV C2D_RELEASE 
+
 
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 

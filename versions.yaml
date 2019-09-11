@@ -89,6 +89,7 @@ versions:
       postgresql:
         version: 9.5.19*
         major: '9.5'
+        minor: '9.5.19'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
