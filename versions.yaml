@@ -39,6 +39,7 @@ versions:
       postgresql:
         version: 11.5*
         major: '11'
+        minor: '11.5'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
@@ -56,6 +57,7 @@ versions:
       postgresql:
         version: 10.10*
         major: '10'
+        minor: '10.10'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
@@ -73,6 +75,7 @@ versions:
       postgresql:
         version: 9.6.15*
         major: '9.6'
+        minor: '9.6.15'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
@@ -106,6 +109,7 @@ versions:
       postgresql:
         version: 9.4.24*
         major: '9.4'
+        minor: '9.4.24'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
@@ -129,6 +133,7 @@ versions:
       postgresql:
         version: '9.6.15*'
         major: '9.6'
+        minor: '9.6.15'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
