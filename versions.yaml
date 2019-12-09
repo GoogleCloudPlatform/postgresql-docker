@@ -141,11 +141,11 @@ versions:
     templateSubDir: exporter
     tags:
       - 'exporter'
-      - 'exporter-0.7.0'
+      - 'exporter-0.8.0'
     from: *from9
     packages:
       postgres_exporter:
-        version: '0.7.0'
+        version: '0.8.0'
     excludeTests:
     - tests/functional_tests/create_db_test.yaml
     - tests/functional_tests/remote_host_test.yaml
