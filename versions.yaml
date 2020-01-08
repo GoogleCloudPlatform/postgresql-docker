@@ -27,6 +27,8 @@ _variables:
 versions:
   - dir: '11'
     repo: postgresql11
+    templateArgs:
+      c2dRelease: '11.6.0'
     tags:
       - '11.6-debian9'
       - '11-debian9'
@@ -44,6 +46,8 @@ versions:
     - tests/functional_tests/exporter_licence_test.yaml
   - dir: '10'
     repo: postgresql10
+    templateArgs:
+      c2dRelease: '10.11.0'
     tags:
       - '10.11-debian9'
       - '10-debian9'
@@ -61,6 +65,8 @@ versions:
     - tests/functional_tests/exporter_licence_test.yaml
   - dir: '9/9.6'
     repo: postgresql9
+    templateArgs:
+      c2dRelease: '9.6.16'
     tags:
       - '9.6.16-debian9'
       - '9.6-debian9'
@@ -78,6 +84,8 @@ versions:
     - tests/functional_tests/exporter_licence_test.yaml
   - dir: '9/9.5'
     repo: postgresql9
+    templateArgs:
+      c2dRelease: '9.5.20'
     tags:
       - '9.5.20-debian9'
       - '9.5-debian9'
@@ -94,6 +102,8 @@ versions:
     - tests/functional_tests/exporter_licence_test.yaml
   - dir: '9/9.4'
     repo: postgresql9
+    templateArgs:
+      c2dRelease: '9.4.25'
     tags:
       - '9.4.25-debian9'
       - '9.4-debian9'
@@ -116,6 +126,7 @@ versions:
     repo: postgresql9
     templateArgs:
       kubernetes: 'true'
+      c2dRelease: '9.6.16'
     tags:
       - '9.6.16-debian9-kubernetes'
       - '9.6-debian9-kubernetes'
