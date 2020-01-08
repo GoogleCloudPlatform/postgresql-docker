@@ -2,6 +2,7 @@ FROM {{ .From }}
 {{- $gosu := index .Packages "gosu" }}
 {{- $postgresql := index .Packages "postgresql" }}
 {{- $kubernetes := index .TemplateArgs "kubernetes" }}
+{{- $c2dRelease := index .TemplateArgs "c2dRelease" }}
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
@@ -79,6 +80,7 @@ RUN set -ex; \
 
 ENV PG_MAJOR {{ $postgresql.Major }}
 ENV PG_VERSION {{ $postgresql.Version }}
+ENV C2D_RELEASE {{ $c2dRelease }}
 
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
