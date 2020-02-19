@@ -28,18 +28,18 @@ versions:
   - dir: '11'
     repo: postgresql11
     templateArgs:
-      c2dRelease: '11.6.0'
+      c2dRelease: '11.7.0'
     tags:
-      - '11.6-debian9'
+      - '11.7-debian9'
       - '11-debian9'
-      - '11.6'
+      - '11.7'
       - '11'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 11.6*
+        version: 11.7*
         major: '11'
         gpg: *gpg
     excludeTests:
@@ -47,18 +47,18 @@ versions:
   - dir: '10'
     repo: postgresql10
     templateArgs:
-      c2dRelease: '10.11.0'
+      c2dRelease: '10.12.0'
     tags:
-      - '10.11-debian9'
+      - '10.12-debian9'
       - '10-debian9'
-      - '10.11'
+      - '10.12'
       - '10'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 10.11*
+        version: 10.12*
         major: '10'
         gpg: *gpg
     excludeTests:
@@ -66,18 +66,18 @@ versions:
   - dir: '9/9.6'
     repo: postgresql9
     templateArgs:
-      c2dRelease: '9.6.16'
+      c2dRelease: '9.6.17'
     tags:
-      - '9.6.16-debian9'
+      - '9.6.17-debian9'
       - '9.6-debian9'
-      - '9.6.16'
+      - '9.6.17'
       - '9.6'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.6.16*
+        version: 9.6.17*
         major: '9.6'
         gpg: *gpg
     excludeTests:
@@ -85,17 +85,17 @@ versions:
   - dir: '9/9.5'
     repo: postgresql9
     templateArgs:
-      c2dRelease: '9.5.20'
+      c2dRelease: '9.5.21'
     tags:
-      - '9.5.20-debian9'
+      - '9.5.21-debian9'
       - '9.5-debian9'
-      - '9.5.20'
+      - '9.5.21'
       - '9.5'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.5.20*
+        version: 9.5.21*
         major: '9.5'
         gpg: *gpg
     excludeTests:
@@ -103,17 +103,17 @@ versions:
   - dir: '9/9.4'
     repo: postgresql9
     templateArgs:
-      c2dRelease: '9.4.25'
+      c2dRelease: '9.4.26'
     tags:
-      - '9.4.25-debian9'
+      - '9.4.26-debian9'
       - '9.4-debian9'
-      - '9.4.25'
+      - '9.4.26'
       - '9.4'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 9.4.25*
+        version: 9.4.26*
         major: '9.4'
         gpg: *gpg
     excludeTests:
@@ -126,18 +126,18 @@ versions:
     repo: postgresql9
     templateArgs:
       kubernetes: 'true'
-      c2dRelease: '9.6.16'
+      c2dRelease: '9.6.17'
     tags:
-      - '9.6.16-debian9-kubernetes'
+      - '9.6.17-debian9-kubernetes'
       - '9.6-debian9-kubernetes'
-      - '9.6.16-kubernetes'
+      - '9.6.17-kubernetes'
       - '9.6-kubernetes'
       - 'kubernetes'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: '9.6.16*'
+        version: '9.6.17*'
         major: '9.6'
         gpg: *gpg
     excludeTests:

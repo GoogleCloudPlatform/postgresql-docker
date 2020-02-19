@@ -75,8 +75,8 @@ RUN set -ex; \
 	apt-key list
 
 ENV PG_MAJOR 11
-ENV PG_VERSION 11.6*
-ENV C2D_RELEASE 11.6.0
+ENV PG_VERSION 11.7*
+ENV C2D_RELEASE 11.7.0
 
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
