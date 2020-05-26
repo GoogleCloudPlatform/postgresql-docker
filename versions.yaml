@@ -148,7 +148,7 @@ versions:
   ## for Prometheus Exporter ##
 
   - dir: 'exporter'
-    repo: postgresql-exporter
+    repo: postgresql-exporter0
     templateSubDir: exporter
     tags:
       - '0.8.0'
