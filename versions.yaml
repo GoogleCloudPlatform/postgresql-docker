@@ -152,6 +152,7 @@ versions:
     templateSubDir: exporter
     tags:
       - '0.8.0'
+      - 'latest'
     from: *from9
     packages:
       postgres_exporter:
