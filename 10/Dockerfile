@@ -1,4 +1,4 @@
-FROM gcr.io/google-appengine/debian9
+FROM marketplace.gcr.io/google/debian9
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
@@ -75,8 +75,8 @@ RUN set -ex; \
 	apt-key list
 
 ENV PG_MAJOR 10
-ENV PG_VERSION 10.13*
-ENV C2D_RELEASE 10.13.0
+ENV PG_VERSION 10.14-1.pgdg90+1
+ENV C2D_RELEASE 10.14.0
 
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
