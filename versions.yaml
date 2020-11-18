@@ -28,11 +28,11 @@ versions:
   - dir: '11'
     repo: postgresql11
     templateArgs:
-      c2dRelease: '11.9.0'
+      c2dRelease: '11.10.1'
     tags:
-      - '11.9-debian9'
+      - '11.10-debian9'
       - '11-debian9'
-      - '11.9'
+      - '11.10'
       - '11'
       - 'latest'
     from: *from9
