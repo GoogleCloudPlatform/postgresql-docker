@@ -39,7 +39,7 @@ versions:
     packages:
       gosu: *gosu
       postgresql:
-        version: 11.9*
+        version: 11.10*
         major: '11'
         gpg: *gpg
     excludeTests:
