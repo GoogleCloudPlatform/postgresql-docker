@@ -89,18 +89,18 @@ versions:
     repo: postgresql9
     templateArgs:
       kubernetes: 'true'
-      c2dRelease: '9.6.19'
+      c2dRelease: '9.6.20'
     tags:
-      - '9.6.19-debian9-kubernetes'
+      - '9.6.20-debian9-kubernetes'
       - '9.6-debian9-kubernetes'
-      - '9.6.19-kubernetes'
+      - '9.6.20-kubernetes'
       - '9.6-kubernetes'
       - 'kubernetes'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: '9.6.19*'
+        version: '9.6.20*'
         major: '9.6'
         gpg: *gpg
     excludeTests:
