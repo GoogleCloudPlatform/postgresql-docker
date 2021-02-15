@@ -28,18 +28,18 @@ versions:
   - dir: '11'
     repo: postgresql11
     templateArgs:
-      c2dRelease: '11.10.1'
+      c2dRelease: '11.11.1'
     tags:
-      - '11.10-debian9'
+      - '11.11-debian9'
       - '11-debian9'
-      - '11.10'
+      - '11.11'
       - '11'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 11.10*
+        version: 11.11*
         major: '11'
         gpg: *gpg
     excludeTests:
