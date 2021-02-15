@@ -47,18 +47,18 @@ versions:
   - dir: '10'
     repo: postgresql10
     templateArgs:
-      c2dRelease: '10.15.0'
+      c2dRelease: '10.16.1'
     tags:
-      - '10.15-debian9'
+      - '10.16-debian9'
       - '10-debian9'
-      - '10.15'
+      - '10.16'
       - '10'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 10.15*
+        version: 10.16*
         major: '10'
         gpg: *gpg
     excludeTests:
