@@ -65,108 +65,103 @@ versions:
   templateArgs:
     c2dRelease: 12.4.0
   templateSubDir: 10+
-- dir: '11'
-  excludeTests:
-  - tests/functional_tests/exporter_licence_test.yaml
-  from: marketplace.gcr.io/google/debian9
-  packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.10'
-    postgresql:
-      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-      major: '11'
-      version: 11.9-1.pgdg90+1
-  repo: postgresql11
-  tags:
-  - 11.9-debian9
-  - 11-debian9
-  - '11.9'
-  - '11'
-  - latest
-  templateArgs:
-    c2dRelease: 11.9.0
-  templateSubDir: 10+
-- dir: '10'
-  excludeTests:
-  - tests/functional_tests/exporter_licence_test.yaml
-  from: marketplace.gcr.io/google/debian9
-  packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.10'
-    postgresql:
-      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-      major: '10'
-      version: 10.14-1.pgdg90+1
-  repo: postgresql10
-  tags:
-  - 10.14-debian9
-  - 10-debian9
-  - '10.14'
-  - '10'
-  - latest
-  templateArgs:
-    c2dRelease: 10.14.0
-  templateSubDir: 10+
-- dir: 9/9.6
-  excludeTests:
-  - tests/functional_tests/exporter_licence_test.yaml
-  from: marketplace.gcr.io/google/debian9
-  packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.10'
-    postgresql:
-      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-      major: '9.6'
-      version: 9.6.19-1.pgdg90+1
-  repo: postgresql9
-  tags:
-  - 9.6.19-debian9
-  - 9.6-debian9
-  - 9-debian9
-  - 9.6.19
-  - '9.6'
-  - '9'
-  - latest
-  templateArgs:
-    c2dRelease: 9.6.19
-  templateSubDir: '9'
-- dir: 9/9.6/kubernetes-app
-  excludeTests:
-  - tests/functional_tests/exporter_licence_test.yaml
-  from: marketplace.gcr.io/google/debian9
-  packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.10'
-    postgresql:
-      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-      major: '9.6'
-      version: 9.6.19-1.pgdg90+1
-  repo: postgresql9
-  tags:
-  - 9.6.19-debian9-kubernetes
-  - 9.6-debian9-kubernetes
-  - 9.6.19-kubernetes
-  - 9.6-kubernetes
-  - kubernetes
-  templateArgs:
-    c2dRelease: 9.6.19
-    kubernetes: 'true'
-  templateSubDir: '9'
-- dir: exporter
-  excludeTests:
-  - tests/functional_tests/create_db_test.yaml
-  - tests/functional_tests/remote_host_test.yaml
-  from: marketplace.gcr.io/google/debian9
-  packages:
-    postgres_exporter:
-      version: 0.8.0
-  repo: postgresql-exporter0
-  tags:
-  - 0.8.0
-  - latest
-  templateSubDir: exporter
+ - dir: '11'
+    repo: postgresql11
+    templateArgs:
+      c2dRelease: '11.11.1'
+    tags:
+      - '11.11-debian9'
+      - '11-debian9'
+      - '11.11'
+      - '11'
+      - 'latest'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: 11.11*
+        major: '11'
+        gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
+  - dir: '10'
+    repo: postgresql10
+    templateArgs:
+      c2dRelease: '10.16.1'
+    tags:
+      - '10.16-debian9'
+      - '10-debian9'
+      - '10.16'
+      - '10'
+      - 'latest'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: 10.16*
+        major: '10'
+        gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
+  - dir: '9/9.6'
+    repo: postgresql9
+    templateArgs:
+      c2dRelease: '9.6.20'
+    tags:
+      - '9.6.20-debian9'
+      - '9.6-debian9'
+      - '9.6.20'
+      - '9.6'
+      - 'latest'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: 9.6.20*
+        major: '9.6'
+        gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
 
+  ## for Kubernetes App ##
+
+  - dir: '9/9.6/kubernetes-app'
+    repo: postgresql9
+    templateArgs:
+      kubernetes: 'true'
+      c2dRelease: '9.6.20'
+    tags:
+      - '9.6.20-debian9-kubernetes'
+      - '9.6-debian9-kubernetes'
+      - '9.6.20-kubernetes'
+      - '9.6-kubernetes'
+      - 'kubernetes'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: '9.6.20*'
+        major: '9.6'
+        gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
+
+  ## end Kubernetes App ##
+
+  ## for Prometheus Exporter ##
+
+  - dir: 'exporter'
+    repo: postgresql-exporter0
+    templateSubDir: exporter
+    tags:
+      - '0.8.0'
+      - 'latest'
+    from: *from9
+    packages:
+      postgres_exporter:
+        version: '0.8.0'
+    excludeTests:
+    - tests/functional_tests/create_db_test.yaml
+    - tests/functional_tests/remote_host_test.yaml
+
+  ## end Prometheus Exporter ##
