@@ -1,0 +1,171 @@
+# Copyright (c) 2017, Google Inc.
+#
+# Permission to use, copy,
+# modify, and distribute this software and its documentation for any purpose,
+# without fee, and without a written agreement is hereby granted, provided that
+# the above copyright notice and this paragraph and the following two paragraphs
+# appear in all copies.
+#
+# IN NO EVENT SHALL GOOGLE BE LIABLE TO ANY PARTY
+# FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING
+# LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION,
+# EVEN IF GOOGLE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# GOOGLE SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT
+# NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+# PARTICULAR PURPOSE. THE SOFTWARE PROVIDED HEREUNDER IS ON AN "AS IS" BASIS,
+# AND GOOGLE HAS NO OBLIGATIONS TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
+# ENHANCEMENTS, OR MODIFICATIONS.
+#
+# Used with http://github.com/GoogleCloudPlatform/runtimes-common/tree/master/docgen
+_templates:
+- &Image launcher.gcr.io/google/postgresql12
+- &PullCommand gcloud docker -- pull launcher.gcr.io/google/postgresql12
+- &ServiceArgs
+  name: postgres
+  image: *Image
+- &BaseServerRun
+  <<: *ServiceArgs
+  exposedPorts:
+  - port: 5432
+  environment:
+    POSTGRES_PASSWORD:
+      value: example-password
+- &BaseClientRun
+  name: postgres-client
+  image: *Image
+  runType: INTERACTIVE_SHELL
+- &BaseExec
+  containerFromRun: *BaseServerRun
+  execType: INTERACTIVE_SHELL
+
+overview:
+  description: |-
+    This image contains an installation of PostgreSQL 12.x.
+
+    For more information, see the
+    [Official Image Launcher Page](https://console.cloud.google.com/launcher/details/google/postgresql12).
+  dockerfileUrl: https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/12
+  pullCommand: *PullCommand
+
+taskGroups:
+
+- title: Run a PostgreSQL server
+  description: This section describes how to spin up a PostgreSQL service using this image.
+  tasks:
+  - title: Start a PostgreSQL instance
+    runtimes: [DOCKER, KUBERNETES]
+    instructions:
+    - run: *BaseServerRun
+    - description: The PostgreSQL server is accessible on port 5432.
+      applicableRuntimes: [DOCKER]
+    - description: >-
+        For information about how to retain your database across restarts, see
+        [](#use-a-persistent-data-volume).
+  - title: Use a persistent data volume
+    runtimes: [DOCKER, KUBERNETES]
+    anchorId: use-a-persistent-data-volume
+    instructions:
+    - description: >-
+        We can store PostgreSQL data on a persistent volume.
+        This way the database remains intact across restarts. Assume that
+        `/my/persistent/dir/postgres` is the persistent directory on the host.
+      applicableRuntimes: [DOCKER]
+    - description: >-
+        We can store PostgreSQL data on a persistent volume.
+        This way the database remains intact across restarts.
+      applicableRuntimes: [KUBERNETES]
+    - run:
+        <<: *BaseServerRun
+        volumes:
+        - name: data
+          path: /var/lib/postgresql/data
+          emptyPersistentVolume:
+            hostPath: /my/persistent/dir/postgres
+            subPath: data
+
+- title: Postgres CLI
+  description: This section describes how to use this image as a PostgreSQL client.
+  tasks:
+  - title: Connect to a running PostgreSQL container
+    runtimes: [DOCKER, KUBERNETES]
+    instructions:
+    - description: >-
+        You can run a PostgreSQL client directly within the container.
+      exec:
+        <<: *BaseExec
+        command: psql --username postgres
+    - description: >-
+        Note: No password is required when connecting from inside the same container.
+  - title: Connect to a remote PostgreSQL server
+    runtimes: [DOCKER, KUBERNETES]
+    instructions:
+    - description: >-
+        Assume that we have a PostgreSQL server running at `some-host` and
+        we want to log on to `some-db` database as `postgres` user. Run the
+        following command.
+      applicableRuntimes: [DOCKER]
+    - description: >-
+        Assume that we have a PostgreSQL server running at `some-host` and
+        we want to log on to `some-db` database as `postgres` user. Run the
+        following command. You will need to enter the password even though
+        there might be no visible passowrd prompt; this is due to limitations
+        of `kubectl exec`.
+      applicableRuntimes: [KUBERNETES]
+      run:
+        <<: *BaseClientRun
+        arguments:
+          - sh
+          - -c
+          - >-
+            'exec psql --host some-host --dbname some-db --username postgres --password'
+
+- title: Maintenance
+  tasks:
+  - title: Creating database dumps
+    runtimes: [DOCKER, KUBERNETES]
+    instructions:
+    - description: >-
+        All databases can be dumped into a `/some/path/all-databases.sql` file on the host
+        using the following command.
+      exec:
+        <<: *BaseExec
+        command: sh -c 'exec pg_dumpall --username postgres'
+        redirectOutputTo: /some/path/all-databases.sql
+
+portReference:
+  ports:
+  - port: '5432'
+    description: Standard PostgreSQL port.
+
+environmentVariableReference:
+  variables:
+  - name: POSTGRES_PASSWORD
+    description: >-
+      The password for the superuser. Also see `POSTGRES_USER` environment variable.
+  - name: POSTGRES_USER
+    description: >-
+      Optionally specifies the name of the superuser. Defaults to `postgres`.
+  - name: PGDATA
+    description: >-
+      Optionally specifies the directory location of the database files. Defaults to
+      `/var/lib/postgresql/data`.
+  - name: POSTGRES_DB
+    description: >-
+      Optionally specifies the name of the default database to be created when the
+      image is first started. Defaults to the value of `POSTGRES_USER`.
+  - name: POSTGRES_INITDB_ARGS
+    description: >-
+      Optionally specifies arguments to send to `postgres initdb`. For example.
+      `--data-checksums --encoding=UTF8`.
+  - name: POSTGRES_INITDB_WALDIR
+    description: >-
+      Optionally specifies a location for the Postgres transaction log. Defaults to
+      a subdirectory of the main Postgres data folder (`PGDATA`).
+
+volumeReference:
+  volumes:
+  - path: /var/lib/postgresql/data
+    description: >-
+      Stores the database files. This is the default which can altered by `PGDATA`
+      environment variable.
