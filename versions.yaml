@@ -25,7 +25,7 @@ _variables:
     gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
 
 versions:
-  - dir: '13'
+  - dir: '13/debian9/13.2'
     repo: postgresql13
     templateArgs:
       c2dRelease: '13.2.1'
@@ -45,7 +45,7 @@ versions:
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
 
-  - dir: '12'
+  - dir: '12/debian9/12.6'
     repo: postgresql12
     templateArgs:
       c2dRelease: '12.6.1'
@@ -65,7 +65,7 @@ versions:
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
 
-  - dir: '11'
+  - dir: '11/debian9/11.11'
     repo: postgresql11
     templateArgs:
       c2dRelease: '11.11.1'
@@ -85,7 +85,7 @@ versions:
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
 
-  - dir: '10'
+  - dir: '10/debian9/10.16'
     repo: postgresql10
     templateArgs:
       c2dRelease: '10.16.1'
@@ -105,7 +105,7 @@ versions:
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
 
-  - dir: '9'
+  - dir: '9/debian9/9.6'
     repo: postgresql9
     templateArgs:
       kubernetes: 'true'
