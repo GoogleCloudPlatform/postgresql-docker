@@ -1,6 +1,6 @@
-#!/bin/bash -eu
+#!/bin/bash -e
 #
-# Copyright (c) 2017, Google Inc.
+# Copyright 2021 Google LLC
 #
 # Permission to use, copy,
 # modify, and distribute this software and its documentation for any purpose,
@@ -56,11 +56,10 @@ if [ "$1" = 'postgres' ] && [ "$(id -u)" = '0' ]; then
 	chmod g+s /var/run/postgresql
 
 	# Create the transaction log directory before initdb is run (below) so the directory is owned by the correct user
-	file_env 'POSTGRES_INITDB_XLOGDIR'
-	if [ "$POSTGRES_INITDB_XLOGDIR" ]; then
-		mkdir -p "$POSTGRES_INITDB_XLOGDIR"
-		chown -R postgres "$POSTGRES_INITDB_XLOGDIR"
-		chmod 700 "$POSTGRES_INITDB_XLOGDIR"
+	if [ "$POSTGRES_INITDB_WALDIR" ]; then
+		mkdir -p "$POSTGRES_INITDB_WALDIR"
+		chown -R postgres "$POSTGRES_INITDB_WALDIR"
+		chmod 700 "$POSTGRES_INITDB_WALDIR"
 	fi
 
 	exec gosu postgres "$BASH_SOURCE" "$@"
@@ -74,8 +73,8 @@ if [ "$1" = 'postgres' ]; then
 	# look specifically for PG_VERSION, as it is expected in the DB dir
 	if [ ! -s "$PGDATA/PG_VERSION" ]; then
 		file_env 'POSTGRES_INITDB_ARGS'
-		if [ "$POSTGRES_INITDB_XLOGDIR" ]; then
-			export POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS --xlogdir $POSTGRES_INITDB_XLOGDIR"
+		if [ "$POSTGRES_INITDB_WALDIR" ]; then
+			export POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS --waldir $POSTGRES_INITDB_WALDIR"
 		fi
 		eval "initdb --username=postgres $POSTGRES_INITDB_ARGS"
 
@@ -105,7 +104,10 @@ if [ "$1" = 'postgres' ]; then
 			authMethod=trust
 		fi
 
-		{ echo; echo "host all all all $authMethod"; } | tee -a "$PGDATA/pg_hba.conf" > /dev/null
+		{
+			echo
+			echo "host all all all $authMethod"
+		} >> "$PGDATA/pg_hba.conf"
 
 		# internal start of server in order to allow set-up using psql-client
 		# does not listen on external TCP/IP and waits until start finishes

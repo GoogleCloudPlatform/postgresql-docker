@@ -1,4 +1,4 @@
-# Copyright (c) 2017, Google Inc.
+# Copyright 2021 Google LLC
 #
 # Permission to use, copy,
 # modify, and distribute this software and its documentation for any purpose,
@@ -25,7 +25,47 @@ _variables:
     gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
 
 versions:
-  - dir: '11'
+  - dir: '13/debian9/13.2'
+    repo: postgresql13
+    templateArgs:
+      c2dRelease: '13.2.1'
+    tags:
+      - '13.2-debian9'
+      - '13-debian9'
+      - '13.2'
+      - '13'
+      - 'latest'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: 13.2*
+        major: '13'
+        gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
+
+  - dir: '12/debian9/12.6'
+    repo: postgresql12
+    templateArgs:
+      c2dRelease: '12.6.1'
+    tags:
+      - '12.6-debian9'
+      - '12-debian9'
+      - '12.6'
+      - '12'
+      - 'latest'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: 12.6*
+        major: '12'
+        gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
+
+  - dir: '11/debian9/11.11'
     repo: postgresql11
     templateArgs:
       c2dRelease: '11.11.1'
@@ -44,7 +84,8 @@ versions:
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
-  - dir: '10'
+
+  - dir: '10/debian9/10.16'
     repo: postgresql10
     templateArgs:
       c2dRelease: '10.16.1'
@@ -63,9 +104,11 @@ versions:
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
-  - dir: '9/9.6'
+
+  - dir: '9/debian9/9.6'
     repo: postgresql9
     templateArgs:
+      kubernetes: 'true'
       c2dRelease: '9.6.20'
     tags:
       - '9.6.20-debian9'
@@ -82,31 +125,6 @@ versions:
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
-
-  ## for Kubernetes App ##
-
-  - dir: '9/9.6/kubernetes-app'
-    repo: postgresql9
-    templateArgs:
-      kubernetes: 'true'
-      c2dRelease: '9.6.20'
-    tags:
-      - '9.6.20-debian9-kubernetes'
-      - '9.6-debian9-kubernetes'
-      - '9.6.20-kubernetes'
-      - '9.6-kubernetes'
-      - 'kubernetes'
-    from: *from9
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: '9.6.20*'
-        major: '9.6'
-        gpg: *gpg
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
-
-  ## end Kubernetes App ##
 
   ## for Prometheus Exporter ##
 

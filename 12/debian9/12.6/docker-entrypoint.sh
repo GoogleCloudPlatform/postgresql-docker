@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-# Copyright (c) 2017, Google Inc.
+# Copyright 2021 Google LLC
 #
 # Permission to use, copy,
 # modify, and distribute this software and its documentation for any purpose,

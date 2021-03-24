@@ -1,4 +1,4 @@
-# Copyright (c) 2017, Google Inc.
+# Copyright 2021 Google LLC
 #
 # Permission to use, copy,
 # modify, and distribute this software and its documentation for any purpose,
@@ -19,8 +19,8 @@
 #
 # Used with http://github.com/GoogleCloudPlatform/runtimes-common/tree/master/docgen
 _templates:
-- &Image launcher.gcr.io/google/postgresql11
-- &PullCommand gcloud docker -- pull launcher.gcr.io/google/postgresql11
+- &Image launcher.gcr.io/google/postgresql10
+- &PullCommand gcloud docker -- pull launcher.gcr.io/google/postgresql10
 - &ServiceArgs
   name: postgres
   image: *Image
@@ -41,11 +41,11 @@ _templates:
 
 overview:
   description: |-
-    This image contains an installation of PostgreSQL 11.x.
+    This image contains an installation of PostgreSQL 10.x.
 
     For more information, see the
-    [Official Image Launcher Page](https://console.cloud.google.com/launcher/details/google/postgresql11).
-  dockerfileUrl: https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/11
+    [Official Image Launcher Page](https://console.cloud.google.com/launcher/details/google/postgresql10).
+  dockerfileUrl: https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/10
   pullCommand: *PullCommand
 
 taskGroups:
