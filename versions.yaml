@@ -44,6 +44,7 @@ versions:
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
+
   - dir: '12'
     repo: postgresql12
     templateArgs:
@@ -63,6 +64,7 @@ versions:
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
+
   - dir: '11'
     repo: postgresql11
     templateArgs:
@@ -82,6 +84,7 @@ versions:
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
+
   - dir: '10'
     repo: postgresql10
     templateArgs:
@@ -101,9 +104,11 @@ versions:
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
-  - dir: '9/9.6'
+
+  - dir: '9'
     repo: postgresql9
     templateArgs:
+      kubernetes: 'true'
       c2dRelease: '9.6.20'
     tags:
       - '9.6.20-debian9'
@@ -120,31 +125,6 @@ versions:
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
-
-  ## for Kubernetes App ##
-
-  - dir: '9/9.6/kubernetes-app'
-    repo: postgresql9
-    templateArgs:
-      kubernetes: 'true'
-      c2dRelease: '9.6.20'
-    tags:
-      - '9.6.20-debian9-kubernetes'
-      - '9.6-debian9-kubernetes'
-      - '9.6.20-kubernetes'
-      - '9.6-kubernetes'
-      - 'kubernetes'
-    from: *from9
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: '9.6.20*'
-        major: '9.6'
-        gpg: *gpg
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
-
-  ## end Kubernetes App ##
 
   ## for Prometheus Exporter ##
 
