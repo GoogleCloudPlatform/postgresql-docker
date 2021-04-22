@@ -30,5 +30,5 @@ tests:
   command: [sha256sum, /usr/share/doc/postgres_exporter/LICENSE]
   expect:
     stdout:
-      equals: 3ba88a50b1031df1d92f06b8e1ef201f308d93e768229add681d2b3acadb7688  /usr/share/doc/postgres_exporter/LICENSE
+      equals: c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4  /usr/share/doc/postgres_exporter/LICENSE
 
