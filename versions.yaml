@@ -25,16 +25,32 @@ _variables:
     gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
 
 versions:
+  - dir: '13/debian9/13.3'
+    repo: postgresql13
+    templateArgs:
+      c2dRelease: '13.3.1'
+    tags:
+      - '13.3-debian9'
+      - '13-debian9'
+      - '13.3'
+      - '13'
+      - 'latest'
+    from: *from9
+    packages:
+      gosu: *gosu
+      postgresql:
+        version: 13.2*
+        major: '13'
+        gpg: *gpg
+    excludeTests:
+    - tests/functional_tests/exporter_licence_test.yaml
   - dir: '13/debian9/13.2'
     repo: postgresql13
     templateArgs:
       c2dRelease: '13.2.1'
     tags:
       - '13.2-debian9'
-      - '13-debian9'
       - '13.2'
-      - '13'
-      - 'latest'
     from: *from9
     packages:
       gosu: *gosu
