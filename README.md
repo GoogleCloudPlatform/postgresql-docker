@@ -26,10 +26,6 @@ gcloud docker -- pull marketplace.gcr.io/google/postgresql13
 Dockerfile for this image can be found [here](https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/13).
 
 # <a name="table-of-contents"></a>Table of Contents
-- [postgresql-docker](#postgresql-docker)
-- [Upstream](#upstream)
-- [Disclaimer](#disclaimer)
-- [<a name="about"></a>About](#a-name%22about%22aabout)
 - [<a name="table-of-contents"></a>Table of Contents](#a-name%22table-of-contents%22atable-of-contents)
 - [<a name="using-kubernetes"></a>Using Kubernetes](#a-name%22using-kubernetes%22ausing-kubernetes)
   - [<a name="run-a-postgresql-server-kubernetes"></a>Run a PostgreSQL server](#a-name%22run-a-postgresql-server-kubernetes%22arun-a-postgresql-server)
