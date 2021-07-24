@@ -15,7 +15,7 @@ This is not an official Google product.
 This image contains an installation of PostgreSQL 13.x.
 
 For more information, see the
-[Official Image Launcher Page](https://console.cloud.google.com/marketplace/details/google/postgresql13).
+[Official Image Marketplace Page](https://console.cloud.google.com/marketplace/details/google/postgresql13).
 
 Pull command (first install [gcloud](https://cloud.google.com/sdk/downloads)):
 
@@ -187,7 +187,7 @@ kubectl exec -it some-postgres -- sh -c 'exec pg_dumpall --username postgres' > 
 
 # <a name="using-docker"></a>Using Docker
 
-Consult [Launcher container documentation](https://cloud.google.com/launcher/docs/launcher-container)
+Consult [Marketplace container documentation](https://cloud.google.com/marketplace/docs/container-images)
 for additional information about setting up your Docker environment.
 
 ## <a name="run-a-postgresql-server-docker"></a>Run a PostgreSQL server
