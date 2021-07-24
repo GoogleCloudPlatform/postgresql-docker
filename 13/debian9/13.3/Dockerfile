@@ -74,9 +74,9 @@ RUN set -ex; \
 	rm -rf "$GNUPGHOME"; \
 	apt-key list
 
-ENV PG_MAJOR 10
-ENV PG_VERSION 10.16*
-ENV C2D_RELEASE 10.16.1
+ENV PG_MAJOR 13
+ENV PG_VERSION 13.3*
+ENV C2D_RELEASE 13.3.1
 
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
