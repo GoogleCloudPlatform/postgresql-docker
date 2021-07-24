@@ -45,83 +45,62 @@ versions:
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
 
-  - dir: '12/debian9/12.6'
+  - dir: '12/debian9/12.7'
     repo: postgresql12
     templateArgs:
-      c2dRelease: '12.6.1'
+      c2dRelease: '12.7.1'
     tags:
-      - '12.6-debian9'
+      - '12.7-debian9'
       - '12-debian9'
-      - '12.6'
+      - '12.7'
       - '12'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 12.6*
+        version: 12.7*
         major: '12'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
 
-  - dir: '11/debian9/11.11'
+  - dir: '11/debian9/11.12'
     repo: postgresql11
     templateArgs:
-      c2dRelease: '11.11.1'
+      c2dRelease: '11.12.1'
     tags:
-      - '11.11-debian9'
+      - '11.12-debian9'
       - '11-debian9'
-      - '11.11'
+      - '11.12'
       - '11'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 11.11*
+        version: 11.12*
         major: '11'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
 
-  - dir: '10/debian9/10.16'
+  - dir: '10/debian9/10.17'
     repo: postgresql10
     templateArgs:
-      c2dRelease: '10.16.1'
+      c2dRelease: '10.17.1'
     tags:
-      - '10.16-debian9'
+      - '10.17-debian9'
       - '10-debian9'
-      - '10.16'
+      - '10.17'
       - '10'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 10.16*
+        version: 10.17*
         major: '10'
-        gpg: *gpg
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
-
-  - dir: '9/debian9/9.6'
-    repo: postgresql9
-    templateArgs:
-      kubernetes: 'true'
-      c2dRelease: '9.6.20'
-    tags:
-      - '9.6.20-debian9'
-      - '9.6-debian9'
-      - '9.6.20'
-      - '9.6'
-      - 'latest'
-    from: *from9
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: 9.6.20*
-        major: '9.6'
         gpg: *gpg
     excludeTests:
     - tests/functional_tests/exporter_licence_test.yaml
