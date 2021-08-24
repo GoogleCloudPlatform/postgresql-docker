@@ -7,6 +7,8 @@ RUN set -ex; \
         if ! command -v gpg > /dev/null; then \
                 apt-get update; \
                 apt-get install -y --no-install-recommends \
+												apt-transport-https \
+												ca-certificates \
                         gnupg \
                         dirmngr \
                 ; \
@@ -77,8 +79,6 @@ RUN set -ex; \
 ENV PG_MAJOR 10
 ENV PG_VERSION 10.17*
 ENV C2D_RELEASE 10.17.1
-
-RUN apt-get update && apt-get install -y apt-transport-https ca-certificates
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt stretch-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
