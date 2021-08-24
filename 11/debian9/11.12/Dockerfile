@@ -78,7 +78,9 @@ ENV PG_MAJOR 11
 ENV PG_VERSION 11.12*
 ENV C2D_RELEASE 11.12.1
 
-RUN echo 'deb http://apt-archive.postgresql.org/pub/repos/apt/ stretch-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
+RUN apt-get update && apt-get install -y apt-transport-https ca-certificates
+
+RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt stretch-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update \
 	&& apt-get install -y postgresql-common \
