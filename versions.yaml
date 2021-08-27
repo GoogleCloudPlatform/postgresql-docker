@@ -25,21 +25,21 @@ _variables:
     gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
 
 versions:
-  - dir: '13/debian9/13.3'
+  - dir: '13/debian9/13.4'
     repo: postgresql13
     templateArgs:
-      c2dRelease: '13.3.1'
+      c2dRelease: '13.4.1'
     tags:
-      - '13.3-debian9'
+      - '13.4-debian9'
       - '13-debian9'
-      - '13.3'
+      - '13.4'
       - '13'
       - 'latest'
     from: *from9
     packages:
       gosu: *gosu
       postgresql:
-        version: 13.3*
+        version: 13.4*
         major: '13'
         gpg: *gpg
     excludeTests:
