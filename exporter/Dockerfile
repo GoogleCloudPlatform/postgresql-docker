@@ -1,6 +1,6 @@
-FROM gcr.io/google-appengine/debian9
+FROM marketplace.gcr.io/google/debian9
 
-ARG EXPORTER_VERSION=0.8.0
+ARG EXPORTER_VERSION=
 RUN env && apt-get update && \
 	apt-get install -y wget && \
 	wget https://github.com/wrouesnel/postgres_exporter/releases/download/v${EXPORTER_VERSION}/postgres_exporter_v${EXPORTER_VERSION}_linux-amd64.tar.gz && \
@@ -14,7 +14,7 @@ RUN env && apt-get update && \
 	apt-get purge -y --auto-remove wget && \
 	rm -rf /var/lib/apt/lists/*
 
-FROM gcr.io/google-appengine/debian9
+FROM marketplace.gcr.io/google/debian9
 COPY --from=0 /postgres_exporter /
 COPY --from=0 /var/tmp/licence/ /usr/share/doc/
 EXPOSE 9187
