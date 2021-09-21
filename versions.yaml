@@ -1,124 +1,123 @@
 # Copyright 2021 Google LLC
 #
-# Permission to use, copy,
-# modify, and distribute this software and its documentation for any purpose,
-# without fee, and without a written agreement is hereby granted, provided that
-# the above copyright notice and this paragraph and the following two paragraphs
-# appear in all copies.
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the "Software"), to deal in
+# the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+# the Software, and to permit persons to whom the Software is furnished to do so,
+# subject to the following conditions:
 #
-# IN NO EVENT SHALL GOOGLE BE LIABLE TO ANY PARTY
-# FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING
-# LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION,
-# EVEN IF GOOGLE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 #
-# GOOGLE SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT
-# NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-# PARTICULAR PURPOSE. THE SOFTWARE PROVIDED HEREUNDER IS ON AN "AS IS" BASIS,
-# AND GOOGLE HAS NO OBLIGATIONS TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
-# ENHANCEMENTS, OR MODIFICATIONS.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+# FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+# COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+# IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-_variables:
-  from9: &from9 gcr.io/google-appengine/debian9
-  gpg: &gpg B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-  gosu: &gosu
-    version: '1.10'
-    gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
 
+cloudbuild:
+  enable_parallel: false
 versions:
-  - dir: '13/debian9/13.4'
-    repo: postgresql13
-    templateArgs:
-      c2dRelease: '13.4.1'
-    tags:
-      - '13.4-debian9'
-      - '13-debian9'
-      - '13.4'
-      - '13'
-      - 'latest'
-    from: *from9
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: 13.4*
-        major: '13'
-        gpg: *gpg
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
+- dir: 13/debian9/13.4
+  excludeTests:
+  - tests/functional_tests/exporter_licence_test.yaml
+  from: marketplace.gcr.io/google/debian9
+  packages:
+    gosu:
+      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
+      version: '1.10'
+    postgresql:
+      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+      major: '13'
+      version: 13.4*
+  repo: postgresql13
+  tags:
+  - 13.4-debian9
+  - 13-debian9
+  - '13.4'
+  - '13'
+  - latest
+  templateArgs:
+    c2dRelease: 13.4.0
+- dir: 12/debian9/12.8
+  excludeTests:
+  - tests/functional_tests/exporter_licence_test.yaml
+  from: marketplace.gcr.io/google/debian9
+  packages:
+    gosu:
+      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
+      version: '1.10'
+    postgresql:
+      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+      major: '12'
+      version: 12.8*
+  repo: postgresql12
+  tags:
+  - 12.8-debian9
+  - 12-debian9
+  - '12.8'
+  - '12'
+  - latest
+  templateArgs:
+    c2dRelease: 12.8.0
+- dir: 11/debian9/11.13
+  excludeTests:
+  - tests/functional_tests/exporter_licence_test.yaml
+  from: marketplace.gcr.io/google/debian9
+  packages:
+    gosu:
+      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
+      version: '1.10'
+    postgresql:
+      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+      major: '11'
+      version: 11.13*
+  repo: postgresql11
+  tags:
+  - 11.13-debian9
+  - 11-debian9
+  - '11.13'
+  - '11'
+  - latest
+  templateArgs:
+    c2dRelease: 11.13.0
+- dir: 10/debian9/10.18
+  excludeTests:
+  - tests/functional_tests/exporter_licence_test.yaml
+  from: marketplace.gcr.io/google/debian9
+  packages:
+    gosu:
+      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
+      version: '1.10'
+    postgresql:
+      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+      major: '10'
+      version: 10.18*
+  repo: postgresql10
+  tags:
+  - 10.18-debian9
+  - 10-debian9
+  - '10.18'
+  - '10'
+  - latest
+  templateArgs:
+    c2dRelease: 10.18.0
+- dir: exporter
+  excludeTests:
+  - tests/functional_tests/create_db_test.yaml
+  - tests/functional_tests/remote_host_test.yaml
+  from: marketplace.gcr.io/google/debian9
+  packages:
+    postgres_exporter:
+      version: 0.8.0
+  repo: postgresql-exporter0
+  tags:
+  - exporter-0.8.0
+  - exporter-0.8
+  - exporter-0
+  - exporter
+  templateSubDir: exporter
 
-  - dir: '12/debian9/12.7'
-    repo: postgresql12
-    templateArgs:
-      c2dRelease: '12.7.1'
-    tags:
-      - '12.7-debian9'
-      - '12-debian9'
-      - '12.7'
-      - '12'
-      - 'latest'
-    from: *from9
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: 12.7*
-        major: '12'
-        gpg: *gpg
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
-
-  - dir: '11/debian9/11.12'
-    repo: postgresql11
-    templateArgs:
-      c2dRelease: '11.12.1'
-    tags:
-      - '11.12-debian9'
-      - '11-debian9'
-      - '11.12'
-      - '11'
-      - 'latest'
-    from: *from9
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: 11.12*
-        major: '11'
-        gpg: *gpg
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
-
-  - dir: '10/debian9/10.17'
-    repo: postgresql10
-    templateArgs:
-      c2dRelease: '10.17.1'
-    tags:
-      - '10.17-debian9'
-      - '10-debian9'
-      - '10.17'
-      - '10'
-      - 'latest'
-    from: *from9
-    packages:
-      gosu: *gosu
-      postgresql:
-        version: 10.17*
-        major: '10'
-        gpg: *gpg
-    excludeTests:
-    - tests/functional_tests/exporter_licence_test.yaml
-
-  ## for Prometheus Exporter ##
-
-  - dir: 'exporter'
-    repo: postgresql-exporter0
-    templateSubDir: exporter
-    tags:
-      - '0.8.0'
-      - 'latest'
-    from: *from9
-    packages:
-      postgres_exporter:
-        version: '0.8.0'
-    excludeTests:
-    - tests/functional_tests/create_db_test.yaml
-    - tests/functional_tests/remote_host_test.yaml
-
-  ## end Prometheus Exporter ##
