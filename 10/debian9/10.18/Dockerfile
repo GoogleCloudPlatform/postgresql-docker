@@ -1,4 +1,4 @@
-FROM gcr.io/google-appengine/debian9
+FROM marketplace.gcr.io/google/debian9
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
@@ -16,7 +16,7 @@ RUN set -ex; \
         fi
 
 # grab gosu for easy step-down from root
-ENV GOSU_VERSION 1.10
+ENV GOSU_VERSION 1.12
 RUN set -x \
   && apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
   && wget -q -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
@@ -76,9 +76,9 @@ RUN set -ex; \
   rm -rf "$GNUPGHOME"; \
   apt-key list
 
-ENV PG_MAJOR 12
-ENV PG_VERSION 12.7*
-ENV C2D_RELEASE 12.7.1
+ENV PG_MAJOR 10
+ENV PG_VERSION 10.18*
+ENV C2D_RELEASE 10.18.0
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt stretch-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
