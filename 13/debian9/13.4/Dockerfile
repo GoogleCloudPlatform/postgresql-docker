@@ -78,7 +78,7 @@ RUN set -ex; \
 
 ENV PG_MAJOR 13
 ENV PG_VERSION 13.4*
-ENV C2D_RELEASE 13.4.0
+ENV C2D_RELEASE 13.4.1
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt stretch-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 

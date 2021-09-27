@@ -35,13 +35,15 @@ versions:
       version: 13.4*
   repo: postgresql13
   tags:
+  - 13.4.1-debian9
   - 13.4-debian9
   - 13-debian9
+  - 13.4.1
   - '13.4'
   - '13'
   - latest
   templateArgs:
-    c2dRelease: 13.4.0
+    c2dRelease: 13.4.1
 - dir: 12/debian9/12.8
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
