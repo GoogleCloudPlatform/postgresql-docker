@@ -21,7 +21,7 @@
 cloudbuild:
   enable_parallel: false
 versions:
-- dir: 14/debian9/14.0
+- dir: 14/debian9/14.1
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian9
@@ -32,16 +32,37 @@ versions:
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '14'
-      version: 14.0*
+      version: 14.1*
   repo: postgresql14
   tags:
-  - 14.0-debian9
+  - 14.1-debian9
   - 14-debian9
-  - '14.0'
+  - '14.1'
   - '14'
   - latest
   templateArgs:
-    c2dRelease: 14.0.0
+    c2dRelease: 14.1.0
+- dir: 13/debian9/13.5
+  excludeTests:
+  - tests/functional_tests/exporter_licence_test.yaml
+  from: marketplace.gcr.io/google/debian9
+  packages:
+    gosu:
+      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
+      version: '1.12'
+    postgresql:
+      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+      major: '13'
+      version: 13.5*
+  repo: postgresql13
+  tags:
+  - 13.5-debian9
+  - 13-debian9
+  - '13.5'
+  - '13'
+  - latest
+  templateArgs:
+    c2dRelease: 13.5.0
 - dir: 13/debian9/13.4
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
@@ -58,14 +79,11 @@ versions:
   tags:
   - 13.4.1-debian9
   - 13.4-debian9
-  - 13-debian9
   - 13.4.1
   - '13.4'
-  - '13'
-  - latest
   templateArgs:
     c2dRelease: 13.4.1
-- dir: 12/debian9/12.8
+- dir: 12/debian9/12.9
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian9
@@ -76,17 +94,17 @@ versions:
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '12'
-      version: 12.8*
+      version: 12.9*
   repo: postgresql12
   tags:
-  - 12.8-debian9
+  - 12.9-debian9
   - 12-debian9
-  - '12.8'
+  - '12.9'
   - '12'
   - latest
   templateArgs:
-    c2dRelease: 12.8.0
-- dir: 11/debian9/11.13
+    c2dRelease: 12.9.0
+- dir: 11/debian9/11.14
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian9
@@ -97,17 +115,17 @@ versions:
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '11'
-      version: 11.13*
+      version: 11.14*
   repo: postgresql11
   tags:
-  - 11.13-debian9
+  - 11.14-debian9
   - 11-debian9
-  - '11.13'
+  - '11.14'
   - '11'
   - latest
   templateArgs:
-    c2dRelease: 11.13.0
-- dir: 10/debian9/10.18
+    c2dRelease: 11.14.0
+- dir: 10/debian9/10.19
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian9
@@ -118,16 +136,16 @@ versions:
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '10'
-      version: 10.18*
+      version: 10.19*
   repo: postgresql10
   tags:
-  - 10.18-debian9
+  - 10.19-debian9
   - 10-debian9
-  - '10.18'
+  - '10.19'
   - '10'
   - latest
   templateArgs:
-    c2dRelease: 10.18.0
+    c2dRelease: 10.19.0
 - dir: exporter
   excludeTests:
   - tests/functional_tests/create_db_test.yaml
