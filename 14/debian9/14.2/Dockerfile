@@ -76,9 +76,9 @@ RUN set -ex; \
   rm -rf "$GNUPGHOME"; \
   apt-key list
 
-ENV PG_MAJOR 12
-ENV PG_VERSION 12.9*
-ENV C2D_RELEASE 12.9.0
+ENV PG_MAJOR 14
+ENV PG_VERSION 14.2*
+ENV C2D_RELEASE 14.2.0
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt stretch-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
