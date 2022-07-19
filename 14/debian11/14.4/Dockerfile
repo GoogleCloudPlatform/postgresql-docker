@@ -77,8 +77,8 @@ RUN set -ex; \
   apt-key list
 
 ENV PG_MAJOR 14
-ENV PG_VERSION 14.3*
-ENV C2D_RELEASE 14.3.0
+ENV PG_VERSION 14.4*
+ENV C2D_RELEASE 14.4.0
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bullseye-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 

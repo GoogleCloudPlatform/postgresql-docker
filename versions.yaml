@@ -21,7 +21,7 @@
 cloudbuild:
   enable_parallel: false
 versions:
-- dir: 14/debian11/14.3
+- dir: 14/debian11/14.4
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
@@ -32,16 +32,16 @@ versions:
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '14'
-      version: 14.3*
+      version: 14.4*
   repo: postgresql14
   tags:
-  - 14.3-debian11
+  - 14.4-debian11
   - 14-debian11
-  - '14.3'
+  - '14.4'
   - '14'
   - latest
   templateArgs:
-    c2dRelease: 14.3.0
+    c2dRelease: 14.4.0
 - dir: 13/debian11/13.7
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
