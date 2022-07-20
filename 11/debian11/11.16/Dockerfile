@@ -11,6 +11,7 @@ RUN set -ex; \
                   ca-certificates \
                   gnupg \
                   dirmngr \
+                  openssl \
                 ; \
                 rm -rf /var/lib/apt/lists/*; \
         fi
