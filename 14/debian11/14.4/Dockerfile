@@ -11,6 +11,7 @@ RUN set -ex; \
                   ca-certificates \
                   gnupg \
                   dirmngr \
+                  libpq-dev \
                   openssl \
                 ; \
                 rm -rf /var/lib/apt/lists/*; \
@@ -103,7 +104,8 @@ RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PG
 VOLUME /var/lib/postgresql/data
 
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
+RUN ln -s usr/local/bin/docker-entrypoint.sh  / \
+    && chown root:postgres /docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
