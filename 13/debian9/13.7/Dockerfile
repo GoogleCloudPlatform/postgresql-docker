@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/debian11
+FROM marketplace.gcr.io/google/debian9
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
@@ -78,8 +78,8 @@ RUN set -ex; \
   apt-key list
 
 ENV PG_MAJOR 13
-ENV PG_VERSION 13.4*
-ENV C2D_RELEASE 13.4.1
+ENV PG_VERSION 13.7*
+ENV C2D_RELEASE 13.7.0
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bullseye-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
