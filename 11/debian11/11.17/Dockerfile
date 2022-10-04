@@ -77,9 +77,9 @@ RUN set -ex; \
   rm -rf "$GNUPGHOME"; \
   apt-key list
 
-ENV PG_MAJOR 13
-ENV PG_VERSION 13.7*
-ENV C2D_RELEASE 13.7.0
+ENV PG_MAJOR 11
+ENV PG_VERSION 11.17*
+ENV C2D_RELEASE 11.17.0
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bullseye-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 

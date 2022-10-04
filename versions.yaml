@@ -21,6 +21,27 @@
 cloudbuild:
   enable_parallel: false
 versions:
+- dir: 14/debian11/14.5
+  excludeTests:
+  - tests/functional_tests/exporter_licence_test.yaml
+  from: marketplace.gcr.io/google/debian11
+  packages:
+    gosu:
+      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
+      version: '1.12'
+    postgresql:
+      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+      major: '14'
+      version: 14.5*
+  repo: postgresql14
+  tags:
+  - 14.5-debian11
+  - 14-debian11
+  - '14.5'
+  - '14'
+  - latest
+  templateArgs:
+    c2dRelease: 14.5.0
 - dir: 14/debian11/14.4
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
@@ -36,13 +57,10 @@ versions:
   repo: postgresql14
   tags:
   - 14.4-debian11
-  - 14-debian11
   - '14.4'
-  - '14'
-  - latest
   templateArgs:
     c2dRelease: 14.4.0
-- dir: 13/debian11/13.7
+- dir: 13/debian11/13.8
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
@@ -53,37 +71,17 @@ versions:
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '13'
-      version: 13.7*
+      version: 13.8*
   repo: postgresql13
   tags:
-  - 13.7-debian11
+  - 13.8-debian11
   - 13-debian11
-  - '13.7'
+  - '13.8'
   - '13'
   - latest
   templateArgs:
-    c2dRelease: 13.7.0
-- dir: 13/debian11/13.4
-  excludeTests:
-  - tests/functional_tests/exporter_licence_test.yaml
-  from: marketplace.gcr.io/google/debian11
-  packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
-    postgresql:
-      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-      major: '13'
-      version: 13.4*
-  repo: postgresql13
-  tags:
-  - 13.4.1-debian11
-  - 13.4-debian11
-  - 13.4.1
-  - '13.4'
-  templateArgs:
-    c2dRelease: 13.4.1
-- dir: 12/debian11/12.11
+    c2dRelease: 13.8.0
+- dir: 12/debian11/12.12
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
@@ -94,17 +92,17 @@ versions:
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '12'
-      version: 12.11*
+      version: 12.12*
   repo: postgresql12
   tags:
-  - 12.11-debian11
+  - 12.12-debian11
   - 12-debian11
-  - '12.11'
+  - '12.12'
   - '12'
   - latest
   templateArgs:
-    c2dRelease: 12.11.0
-- dir: 11/debian11/11.16
+    c2dRelease: 12.12.0
+- dir: 11/debian11/11.17
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
@@ -115,16 +113,16 @@ versions:
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '11'
-      version: 11.16*
+      version: 11.17*
   repo: postgresql11
   tags:
-  - 11.16-debian11
+  - 11.17-debian11
   - 11-debian11
-  - '11.16'
+  - '11.17'
   - '11'
   - latest
   templateArgs:
-    c2dRelease: 11.16.0
+    c2dRelease: 11.17.0
 - dir: exporter
   excludeTests:
   - tests/functional_tests/create_db_test.yaml
