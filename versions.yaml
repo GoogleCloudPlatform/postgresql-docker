@@ -125,27 +125,6 @@ versions:
   - latest
   templateArgs:
     c2dRelease: 11.16.0
-- dir: 10/debian11/10.21
-  excludeTests:
-  - tests/functional_tests/exporter_licence_test.yaml
-  from: marketplace.gcr.io/google/debian11
-  packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
-    postgresql:
-      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-      major: '10'
-      version: 10.21*
-  repo: postgresql10
-  tags:
-  - 10.21-debian11
-  - 10-debian11
-  - '10.21'
-  - '10'
-  - latest
-  templateArgs:
-    c2dRelease: 10.21.0
 - dir: exporter
   excludeTests:
   - tests/functional_tests/create_db_test.yaml
