@@ -112,6 +112,25 @@ COPY tls-configuration.sh /docker-entrypoint-initdb.d/
 {{- end }}
 RUN ln -s usr/local/bin/docker-entrypoint.sh  / \
     && chown root:postgres /docker-entrypoint.sh
+
+# Fix Debian vulnerabilities installing latest packages
+RUN apt-get update && \
+    apt-get -y install \
+      dpkg \
+      gzip \
+      libc-bin \
+      libc-l10n \
+      libc6 \
+      liblzma5 \
+      libpcre2-8-0 \
+      libssl1.1 \
+      libsystemd0 \
+      libtirpc-common \
+      libtirpc3 \
+      libudev1 \
+      locales \
+      zlib1g
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432

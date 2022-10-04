@@ -77,9 +77,9 @@ RUN set -ex; \
   rm -rf "$GNUPGHOME"; \
   apt-key list
 
-ENV PG_MAJOR 10
-ENV PG_VERSION 10.21*
-ENV C2D_RELEASE 10.21.0
+ENV PG_MAJOR 13
+ENV PG_VERSION 13.8*
+ENV C2D_RELEASE 13.8.0
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bullseye-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
@@ -105,6 +105,25 @@ VOLUME /var/lib/postgresql/data
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint.sh  / \
     && chown root:postgres /docker-entrypoint.sh
+
+# Fix Debian vulnerabilities installing latest packages
+RUN apt-get update && \
+    apt-get -y install \
+      dpkg \
+      gzip \
+      libc-bin \
+      libc-l10n \
+      libc6 \
+      liblzma5 \
+      libpcre2-8-0 \
+      libssl1.1 \
+      libsystemd0 \
+      libtirpc-common \
+      libtirpc3 \
+      libudev1 \
+      locales \
+      zlib1g
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
