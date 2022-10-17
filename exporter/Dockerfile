@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/debian11
+FROM marketplace.gcr.io/google/debian9
 
 ARG EXPORTER_VERSION=0.8.0
 RUN env && apt-get update && \
@@ -14,7 +14,7 @@ RUN env && apt-get update && \
 	apt-get purge -y --auto-remove wget && \
 	rm -rf /var/lib/apt/lists/*
 
-FROM marketplace.gcr.io/google/debian11
+FROM marketplace.gcr.io/google/debian9
 COPY --from=0 /postgres_exporter /
 COPY --from=0 /var/tmp/licence/ /usr/share/doc/
 EXPOSE 9187
