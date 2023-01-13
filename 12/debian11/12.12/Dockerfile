@@ -118,6 +118,7 @@ RUN apt-get update && \
       libpcre2-8-0 \
       libssl1.1 \
       libsystemd0 \
+      libtasn1-6 \
       libtirpc-common \
       libtirpc3 \
       libudev1 \
