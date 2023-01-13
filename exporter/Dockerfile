@@ -2,7 +2,7 @@ FROM marketplace.gcr.io/google/debian11
 
 ARG EXPORTER_VERSION=0.8.0
 RUN env && apt-get update && \
-	apt-get install -y wget && \
+	apt-get install -y wget libtasn1-6 && \
 	wget https://github.com/wrouesnel/postgres_exporter/releases/download/v${EXPORTER_VERSION}/postgres_exporter_v${EXPORTER_VERSION}_linux-amd64.tar.gz && \
 	tar xzvf postgres_exporter_v${EXPORTER_VERSION}_linux-amd64.tar.gz && \
 	mv postgres_exporter_v${EXPORTER_VERSION}_linux-amd64/postgres_exporter / && \

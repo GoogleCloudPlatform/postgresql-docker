@@ -21,6 +21,27 @@
 cloudbuild:
   enable_parallel: false
 versions:
+- dir: 15/debian11/15.1
+  excludeTests:
+  - tests/functional_tests/exporter_licence_test.yaml
+  from: marketplace.gcr.io/google/debian11
+  packages:
+    gosu:
+      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
+      version: '1.12'
+    postgresql:
+      gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+      major: '15'
+      version: 15.1*
+  repo: postgresql15
+  tags:
+  - 15.1-debian11
+  - 15-debian11
+  - '15.1'
+  - '15'
+  - latest
+  templateArgs:
+    c2dRelease: 15.1.0
 - dir: 14/debian11/14.5
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
@@ -39,7 +60,6 @@ versions:
   - 14-debian11
   - '14.5'
   - '14'
-  - latest
   templateArgs:
     c2dRelease: 14.5.0
 - dir: 14/debian11/14.4
