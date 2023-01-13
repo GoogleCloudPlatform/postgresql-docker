@@ -20,15 +20,17 @@
 
 cloudbuild:
   enable_parallel: false
+_variables:
+  gosu111: &gosu111
+    gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
+    version: '1.11'
 versions:
 - dir: 15/debian11/15.1
   excludeTests:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
   packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+    gosu: *gosu111
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '15'
@@ -47,9 +49,7 @@ versions:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
   packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+    gosu: *gosu111
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '14'
@@ -67,9 +67,7 @@ versions:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
   packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+    gosu: *gosu111
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '14'
@@ -85,9 +83,7 @@ versions:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
   packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+    gosu: *gosu111
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '13'
@@ -106,9 +102,7 @@ versions:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
   packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+    gosu: *gosu111
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '12'
@@ -127,9 +121,7 @@ versions:
   - tests/functional_tests/exporter_licence_test.yaml
   from: marketplace.gcr.io/google/debian11
   packages:
-    gosu:
-      gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+    gosu: *gosu111
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '11'
