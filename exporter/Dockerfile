@@ -2,7 +2,7 @@ FROM marketplace.gcr.io/google/debian11
 
 ARG EXPORTER_VERSION=0.8.0
 RUN env && apt-get update && \
-	apt-get install -y wget libtasn1-6 && \
+	apt-get install -y wget && \
 	wget https://github.com/wrouesnel/postgres_exporter/releases/download/v${EXPORTER_VERSION}/postgres_exporter_v${EXPORTER_VERSION}_linux-amd64.tar.gz && \
 	tar xzvf postgres_exporter_v${EXPORTER_VERSION}_linux-amd64.tar.gz && \
 	mv postgres_exporter_v${EXPORTER_VERSION}_linux-amd64/postgres_exporter / && \
@@ -15,6 +15,13 @@ RUN env && apt-get update && \
 	rm -rf /var/lib/apt/lists/*
 
 FROM marketplace.gcr.io/google/debian11
+
+# Update openssl and libtasn
+RUN apt-get update \
+    && apt-get install --no-install-recommends -yqq openssl libtasn1-6 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --from=0 /postgres_exporter /
 COPY --from=0 /var/tmp/licence/ /usr/share/doc/
 EXPOSE 9187
