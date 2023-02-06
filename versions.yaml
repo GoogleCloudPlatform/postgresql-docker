@@ -60,6 +60,7 @@ versions:
   - 14-debian11
   - '14.5'
   - '14'
+  - latest
   templateArgs:
     c2dRelease: 14.5.0
 - dir: 14/debian11/14.4
