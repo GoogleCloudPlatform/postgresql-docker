@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/debian11
+FROM marketplace.gcr.io/google/c2d-debian11
 
 ARG EXPORTER_VERSION=0.8.0
 RUN env && apt-get update && \
@@ -14,7 +14,7 @@ RUN env && apt-get update && \
 	apt-get purge -y --auto-remove wget && \
 	rm -rf /var/lib/apt/lists/*
 
-FROM marketplace.gcr.io/google/debian11
+FROM marketplace.gcr.io/google/c2d-debian11
 
 # Update openssl and libtasn
 RUN apt-get update \
