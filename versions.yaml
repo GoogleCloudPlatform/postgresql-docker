@@ -28,7 +28,7 @@ versions:
   packages:
     gosu:
       gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+      version: '1.16'
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '15'
@@ -49,7 +49,7 @@ versions:
   packages:
     gosu:
       gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+      version: '1.16'
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '14'
@@ -70,7 +70,7 @@ versions:
   packages:
     gosu:
       gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+      version: '1.16'
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '13'
@@ -99,4 +99,3 @@ versions:
   - '0'
   - latest
   templateSubDir: exporter
-
