@@ -1,6 +1,6 @@
 FROM marketplace.gcr.io/google/c2d-debian11
 
-ARG EXPORTER_VERSION=0.8.0
+ARG EXPORTER_VERSION=0.13.2
 RUN env && apt-get update && \
 	apt-get install -y wget && \
 	wget https://github.com/wrouesnel/postgres_exporter/releases/download/v${EXPORTER_VERSION}/postgres_exporter_v${EXPORTER_VERSION}_linux-amd64.tar.gz && \
