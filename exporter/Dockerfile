@@ -1,6 +1,6 @@
 FROM marketplace.gcr.io/google/c2d-debian11
 
-ARG EXPORTER_VERSION=0.13.2
+ARG EXPORTER_VERSION=0.8.0
 ENV EXPORTER_VERSION "${EXPORTER_VERSION}"
 RUN env && apt-get update && \
 	apt-get install --no-install-recommends -y curl openssl libtasn1-6 \
