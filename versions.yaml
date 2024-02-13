@@ -113,11 +113,11 @@ versions:
   from: marketplace.gcr.io/google/c2d-debian11
   packages:
     postgres_exporter:
-      version: 0.8.0
+      version: 0.15.0
   repo: postgresql-exporter0
   tags:
-  - 0.8.0
-  - '0.8'
+  - 0.15.0
+  - '0.15'
   - '0'
   - latest
   templateSubDir: exporter
