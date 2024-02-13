@@ -20,6 +20,7 @@
 
 cloudbuild:
   enable_parallel: false
+  machineType: E2_HIGHCPU_32
 versions:
 - dir: 16/debian11/16.2
   excludeTests:
@@ -28,7 +29,7 @@ versions:
   packages:
     gosu:
       gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.16'
+      version: '1.17'
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '16'
@@ -49,7 +50,7 @@ versions:
   packages:
     gosu:
       gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+      version: '1.17'
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '15'
@@ -70,7 +71,7 @@ versions:
   packages:
     gosu:
       gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+      version: '1.17'
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '14'
@@ -91,7 +92,7 @@ versions:
   packages:
     gosu:
       gpg: B42F6819007F00F88E364FD4036A9C25BF357DD4
-      version: '1.12'
+      version: '1.17'
     postgresql:
       gpg: B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
       major: '13'
