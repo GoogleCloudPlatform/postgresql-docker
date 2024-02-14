@@ -1,4 +1,17 @@
+FROM marketplace.gcr.io/google/c2d-debian11 as ospo
+
+# Download Licenses
+COPY components.csv /components.csv
+
+RUN curl -o /download-licenses.sh -L https://raw.githubusercontent.com/GoogleCloudPlatform/click-to-deploy/master/scripts/download-licenses.sh \
+		&& chmod +x /download-licenses.sh
+
+RUN mkdir -p /usr/src/licenses \
+		&& /download-licenses.sh /components.csv /usr/src/licenses
+
 FROM marketplace.gcr.io/google/c2d-debian11
+
+COPY --from=ospo /usr/src /usr/src
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
@@ -129,4 +142,3 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
 CMD ["postgres"]
-
