@@ -1,4 +1,18 @@
+FROM marketplace.gcr.io/google/c2d-debian11 as ospo
+
+# Download Licenses
+COPY components.csv /components.csv
+
+RUN apt update && apt -y install ca-certificates \
+    && curl -o /download-licenses.sh -L https://raw.githubusercontent.com/GoogleCloudPlatform/click-to-deploy/master/scripts/download-licenses.sh \
+		&& chmod +x /download-licenses.sh
+
+RUN mkdir -p /usr/src/licenses \
+		&& /download-licenses.sh /components.csv /usr/src/licenses
+
 FROM marketplace.gcr.io/google/c2d-debian11
+
+COPY --from=ospo /usr/src /usr/src
 
 # explicitly set user/group IDs
 RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres
@@ -17,7 +31,7 @@ RUN set -ex; \
         fi
 
 # grab gosu for easy step-down from root
-ENV GOSU_VERSION 1.16
+ENV GOSU_VERSION 1.17
 RUN set -x \
   && apt-get update && apt-get install -y --no-install-recommends ca-certificates wget openssl && rm -rf /var/lib/apt/lists/* \
   && wget -q -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
@@ -78,8 +92,8 @@ RUN set -ex; \
   apt-key list
 
 ENV PG_MAJOR 15
-ENV PG_VERSION 15.3*
-ENV C2D_RELEASE 15.3.0
+ENV PG_VERSION 15.6*
+ENV C2D_RELEASE 15.6.0
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bullseye-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
@@ -129,4 +143,3 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
 CMD ["postgres"]
-

@@ -1,4 +1,4 @@
-FROM {{ .From }} as ospo
+FROM marketplace.gcr.io/google/c2d-debian11 as ospo
 
 # Download Licenses
 COPY components.csv /components.csv
@@ -10,12 +10,7 @@ RUN apt update && apt -y install ca-certificates \
 RUN mkdir -p /usr/src/licenses \
 		&& /download-licenses.sh /components.csv /usr/src/licenses
 
-FROM {{ .From }}
-
-{{- $gosu := index .Packages "gosu" }}
-{{- $postgresql := index .Packages "postgresql" }}
-{{- $kubernetes := index .TemplateArgs "kubernetes" }}
-{{- $c2dRelease := index .TemplateArgs "c2dRelease" }}
+FROM marketplace.gcr.io/google/c2d-debian11
 
 COPY --from=ospo /usr/src /usr/src
 
@@ -36,7 +31,7 @@ RUN set -ex; \
         fi
 
 # grab gosu for easy step-down from root
-ENV GOSU_VERSION {{ $gosu.Version }}
+ENV GOSU_VERSION 1.17
 RUN set -x \
   && apt-get update && apt-get install -y --no-install-recommends ca-certificates wget openssl && rm -rf /var/lib/apt/lists/* \
   && wget -q -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
@@ -57,7 +52,7 @@ RUN set -x \
     hkp://p80.pool.sks-keyservers.net:80 \
     hkp://keyserver.ubuntu.com:80 \
   ; do \
-    gpg --no-tty --keyserver $server --recv-keys {{ $gosu.Gpg }} \
+    gpg --no-tty --keyserver $server --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
       && found="yes" && break; \
   done; test -n "$found" \
   && gpg --no-tty --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
@@ -74,7 +69,7 @@ ENV LANG en_US.utf8
 RUN mkdir /docker-entrypoint-initdb.d
 
 RUN set -ex; \
-  key='{{ $postgresql.Gpg }}'; \
+  key='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8'; \
   export GNUPGHOME="$(mktemp -d)"; \
   found=''; \
   for server in \
@@ -96,9 +91,9 @@ RUN set -ex; \
   rm -rf "$GNUPGHOME"; \
   apt-key list
 
-ENV PG_MAJOR {{ $postgresql.Major }}
-ENV PG_VERSION {{ $postgresql.Version }}
-ENV C2D_RELEASE {{ $c2dRelease }}
+ENV PG_MAJOR 13
+ENV PG_VERSION 13.14*
+ENV C2D_RELEASE 13.14.0
 
 RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bullseye-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
@@ -122,9 +117,6 @@ RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PG
 VOLUME /var/lib/postgresql/data
 
 COPY docker-entrypoint.sh /usr/local/bin/
-{{- if (eq $kubernetes "true") }}
-COPY tls-configuration.sh /docker-entrypoint-initdb.d/
-{{- end }}
 RUN ln -s usr/local/bin/docker-entrypoint.sh  / \
     && chown root:postgres /docker-entrypoint.sh
 

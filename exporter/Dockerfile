@@ -1,9 +1,9 @@
 FROM marketplace.gcr.io/google/c2d-debian11
 
-ARG EXPORTER_VERSION=0.13.2
+ARG EXPORTER_VERSION=0.15.0
 ENV EXPORTER_VERSION "${EXPORTER_VERSION}"
 RUN env && apt-get update && \
-	apt-get install --no-install-recommends -y curl openssl libtasn1-6 \
+	apt-get install --no-install-recommends -y ca-certificates curl openssl libtasn1-6 \
 		&& curl -L -o postgres-exporter.tar.gz \
 			https://github.com/prometheus-community/postgres_exporter/releases/download/v${EXPORTER_VERSION}/postgres_exporter-${EXPORTER_VERSION}.linux-amd64.tar.gz \
 		&& tar xzvf postgres-exporter.tar.gz \
