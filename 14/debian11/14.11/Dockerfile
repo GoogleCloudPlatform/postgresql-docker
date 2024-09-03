@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/c2d-debian11 as ospo
+FROM gcr.io/cloud-marketplace/google/c2d-debian11:11.5 as ospo
 
 # Download Licenses
 COPY components.csv /components.csv
@@ -10,7 +10,7 @@ RUN apt update && apt -y install ca-certificates \
 RUN mkdir -p /usr/src/licenses \
 		&& /download-licenses.sh /components.csv /usr/src/licenses
 
-FROM marketplace.gcr.io/google/c2d-debian11
+FROM marketplace.gcr.io/google/c2d-debian11:11.5
 
 COPY --from=ospo /usr/src /usr/src
 
@@ -128,6 +128,7 @@ RUN apt-get update && \
       libc-bin \
       libc-l10n \
       libc6 \
+      libkrb5-3 \
       liblzma5 \
       libpcre2-8-0 \
       libssl1.1 \
