@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/c2d-debian11
+FROM marketplace.gcr.io/google/debian12
 
 ARG EXPORTER_VERSION=0.15.0
 ENV EXPORTER_VERSION "${EXPORTER_VERSION}"
