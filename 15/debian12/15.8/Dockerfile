@@ -1,16 +1,16 @@
-FROM marketplace.gcr.io/google/c2d-debian11 as ospo
+FROM marketplace.gcr.io/google/debian12 as ospo
 
 # Download Licenses
 COPY components.csv /components.csv
 
-RUN apt update && apt -y install ca-certificates \
+RUN apt update && apt -y install curl ca-certificates \
     && curl -o /download-licenses.sh -L https://raw.githubusercontent.com/GoogleCloudPlatform/click-to-deploy/master/scripts/download-licenses.sh \
 		&& chmod +x /download-licenses.sh
 
 RUN mkdir -p /usr/src/licenses \
 		&& /download-licenses.sh /components.csv /usr/src/licenses
 
-FROM marketplace.gcr.io/google/c2d-debian11
+FROM marketplace.gcr.io/google/debian12
 
 COPY --from=ospo /usr/src /usr/src
 
@@ -91,11 +91,11 @@ RUN set -ex; \
   rm -rf "$GNUPGHOME"; \
   apt-key list
 
-ENV PG_MAJOR 13
-ENV PG_VERSION 13.14*
-ENV C2D_RELEASE 13.14.0
+ENV PG_MAJOR 15
+ENV PG_VERSION 15.8*
+ENV C2D_RELEASE 15.8.0
 
-RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bullseye-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
+RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bookworm-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update \
   && apt-get install -y postgresql-common \
@@ -130,7 +130,6 @@ RUN apt-get update && \
       libc6 \
       liblzma5 \
       libpcre2-8-0 \
-      libssl1.1 \
       libsystemd0 \
       libtasn1-6 \
       libtirpc-common \

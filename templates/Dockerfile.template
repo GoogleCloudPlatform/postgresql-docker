@@ -3,7 +3,7 @@ FROM {{ .From }} as ospo
 # Download Licenses
 COPY components.csv /components.csv
 
-RUN apt update && apt -y install ca-certificates \
+RUN apt update && apt -y install curl ca-certificates \
     && curl -o /download-licenses.sh -L https://raw.githubusercontent.com/GoogleCloudPlatform/click-to-deploy/master/scripts/download-licenses.sh \
 		&& chmod +x /download-licenses.sh
 
@@ -100,7 +100,7 @@ ENV PG_MAJOR {{ $postgresql.Major }}
 ENV PG_VERSION {{ $postgresql.Version }}
 ENV C2D_RELEASE {{ $c2dRelease }}
 
-RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bullseye-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
+RUN echo 'deb https://apt-archive.postgresql.org/pub/repos/apt bookworm-pgdg-archive main' > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update \
   && apt-get install -y postgresql-common \
@@ -138,7 +138,6 @@ RUN apt-get update && \
       libc6 \
       liblzma5 \
       libpcre2-8-0 \
-      libssl1.1 \
       libsystemd0 \
       libtasn1-6 \
       libtirpc-common \
